@@ -1,234 +1,340 @@
-# Lyric / Lyricx Specification
+# EPIC Format
 
-A lightweight, human-readable format for modern music production ---
-designed for both traditional workflows and the AI era.
+**EPIC (Extended Performance & Intelligence Cues)** is a lightweight,
+human‑readable format for writing, generating, and performing structured
+lyrics and timed performance cues.
 
-------------------------------------------------------------------------
+EPIC bridges the gap between:
 
-## Why This Exists
+-   lyric writing
+-   AI music generation prompts
+-   subtitle / cue formats
+-   performance timing systems
 
-Music production has evolved.
-
-We now work across:
-
--   DAWs
--   Collaboration tools
--   Git repositories
--   AI music generation platforms
--   Live performance cue systems
-
-But lyric files are still mostly:
-
--   Plain text with no structure
--   Or closed proprietary formats
-
-**Lyric / Lyricx** is a simple, open standard that bridges:
-
--   Human readability
--   Producer usability
--   Machine parsing
--   AI integration
-
-Without sacrificing simplicity.
+while remaining **plain text, deterministic, and version‑control
+friendly**.
 
 ------------------------------------------------------------------------
 
-## The Two Formats
+# Quick Start
 
-### `.lyric`
+Create a file called:
 
-A structured lyric format with section labels.
-
-Use when you want:
-
--   Clear section delineation
--   Producer-friendly organization
--   AI-ready generation metadata
--   Clean readability in plain text
+    song.epic
 
 Example:
 
     ---
     Title: Elem-en Ellow Vo
-    Artist: Kozzality
+    Author: Jade Rigby
+
+    BPM: 128
+    Tags: techno, hypnotic
+
+    Production:
+    Warehouse reverb
+    Dry analog kick
 
     [Generation]
-    Styles: edm, techno, industrial, trip hop
+    Styles:
+    1. Deep hypnotic minimal techno
+    2. Dark warehouse techno
+
+    UseStyle: 1
+    Persona: Female vocalist
+    Energy: 0.75
     ---
 
     [Verse]
-    Epulote row span nisa con
+    Standing in the pulse of a neon light
 
     [Chorus]
-    Melon car stay voy
+    Right here — right now
 
-Line breaks represent lyrical phrasing.
+This file can be used for:
+
+-   lyric writing
+-   AI music generation prompts
+-   structured song documentation
+
+Later it can be aligned to timing using:
+
+    song.epicx
 
 ------------------------------------------------------------------------
 
-### `.lyricx`
+# Overview
 
-An extended format that adds precise timing metadata.
+EPIC defines two complementary formats.
 
-Use when you need:
+  -----------------------------------------------------------------------
+  Format                              Purpose
+  ----------------------------------- -----------------------------------
+  `.epic`                             Authoring format for lyrics,
+                                      structure, and generation metadata
 
--   Timestamp-aligned vocals
--   Structured cueing
--   Synchronization with audio
--   AI singing alignment
--   Arrangement reconstruction
+  `.epicx`                            Timed performance format for lyric
+                                      synchronization and cues
+  -----------------------------------------------------------------------
+
+This separation allows creators to write lyrics first and align timing
+later.
+
+------------------------------------------------------------------------
+
+# Why EPIC Exists
+
+Modern music workflows span multiple environments:
+
+-   AI music generation
+-   DAWs
+-   collaboration tools
+-   Git repositories
+-   subtitle systems
+-   lyric video tools
+
+Existing formats usually support only **one part** of this workflow.
+
+EPIC aims to provide a single format that supports:
+
+-   human readability
+-   machine parsing
+-   AI prompt integration
+-   lyric structure
+-   performance timing
+-   extensibility
+
+------------------------------------------------------------------------
+
+# Key Features
+
+## Structured Song Sections
+
+    [Verse]
+    Standing in the pulse of a neon light
+
+    [Chorus]
+    Right here, right now
+
+Supported section styles include:
+
+-   Verse
+-   Chorus
+-   Bridge
+-   Intro
+-   Outro
+-   Final Chorus
+
+------------------------------------------------------------------------
+
+## Generation Metadata
+
+The `[Generation]` block contains parameters useful for AI music
+generation.
+
+    [Generation]
+    Styles:
+    1. Deep hypnotic minimal techno
+    2. Dark warehouse techno
+
+    UseStyle: 1
+    Persona: Female vocalist
+    Energy: 0.75
+
+AI systems can automatically populate generation inputs from these
+fields.
+
+------------------------------------------------------------------------
+
+## Production Notes
+
+Production notes describe sonic or musical intent.
+
+    Production:
+    Warehouse reverb
+    Dry analog kick
+    Long evolving pads
+
+Production blocks must contain **at least one non‑empty line**.
+
+------------------------------------------------------------------------
+
+## Instruction Blocks
+
+EPIC distinguishes between **lyrics** and **instructions** using double
+curly braces.
+
+    {{ instruction }}
+
+Instruction blocks may appear as:
+
+  Type            Example
+  --------------- ----------------------------
+  Sectional       `[Verse {{choral chant}}]`
+  Contextual      `tear {{ipa: /tɛr/}}`
+  Instructional   `{{big drop}}`
+  Timestamp       `word{{00:48.633}}`
+
+Instruction items may be:
+
+-   phrases
+-   key/value pairs
+-   timestamps
 
 Example:
 
-    1
-    00:48:633
-    [Verse]
-    Epulote row span nisa con
-
-Timestamp format:
-
-    MM:SS:mmm
-
-Optional exit time:
-
-    00:48:633 --> 00:52:100
-
-Each entry is separated by exactly one blank line.
+    {{ipa: /tɛr/, whispered}}
 
 ------------------------------------------------------------------------
 
-## Header Structure
+## Word-Level Timing
 
-Both `.lyric` and `.lyricx` share the same header format.
+`.epicx` supports precise lyric synchronization.
 
-### Required Fields
+Example:
 
-    Title:
-    Artist:
+    tear{{00:48.633}} fell{{00:48.800}} from{{00:48.900}} my{{00:49.000}} eye{{00:49.200}}
 
-These must appear first, in that order.
+This enables:
 
-### Optional Fields
+-   karaoke rendering
+-   lyric video generation
+-   vocal alignment
+-   performance cues
 
--   BPM
--   Key
--   TimeSignature
--   Version
--   LXVersion
+------------------------------------------------------------------------
 
-By convention:
+# Example `.epic`
 
--   `Version` and `LXVersion` appear last in the optional block.
--   A single blank line must precede `[Generation]`.
+    ---
+    Title: Elem-en Ellow Vo
+    Author: Jade Rigby
 
-### Generation Section
+    BPM: 128
+    Tags: techno, hypnotic
+
+    Production:
+    Warehouse reverb
+    Dry analog kick
 
     [Generation]
-    Styles: ...
+    Styles:
+    1. Deep hypnotic minimal techno
+    2. Dark warehouse techno
 
--   Must be capitalized exactly as shown.
--   Is optional.
--   Field order is unrestricted.
--   `Styles` is freeform and may contain empty lines.
+    UseStyle: 1
+    Persona: Female vocalist
+    Energy: 0.75
+    ---
 
-This allows both AI directives and human production notes.
+    [Verse]
+    Standing in the pulse of a neon light
 
-------------------------------------------------------------------------
-
-## Design Principles
-
-### 1. Human First
-
-Readable in any plain text editor.
-
-### 2. Machine Parsable
-
-Deterministic ordering and timestamp format.
-
-### 3. Producer Friendly
-
-Supports BPM, key, time signature, and arrangement structure.
-
-### 4. AI Compatible
-
-Supports generation directives without locking the format to a single
-platform.
-
-### 5. Extensible Without Bloat
-
-Minimal core.
-Open-ended generation metadata.
+    [Chorus]
+    Right here — right now
 
 ------------------------------------------------------------------------
 
-## Who This Is For
+# Example `.epicx`
 
--   Music producers
--   Songwriters
--   AI music creators
--   Tool developers
--   DAW plugin authors
--   Live performance engineers
+    1
+    00:48.633
+    [Verse]
+    Standing{{00:48.633}} in{{00:48.800}} the{{00:48.900}} pulse{{00:49.200}}
 
-If you work with lyrics, structure, or timed vocal data --- this format
-is for you.
+    2
+    00:51.000
+    [Chorus]
+    Right{{00:51.000}} here{{00:51.200}} right{{00:51.400}} now{{00:51.600}}
 
-------------------------------------------------------------------------
-
-## Why Not Just Markdown?
-
-Markdown is flexible but:
-
--   Has no timing structure
--   Has no ordering rules
--   Has no defined musical metadata fields
--   Is inconsistent across implementations
-
-Lyric / Lyricx defines:
-
--   Order
--   Timing precision
--   Section rules
--   Header semantics
-
-While remaining as readable as Markdown.
+Entries are separated by **exactly one blank line**.
 
 ------------------------------------------------------------------------
 
-## Status
+# Timestamp Format
 
-**Spec Version:** 1.0
+EPIC uses a deterministic timestamp format:
 
-This is a stable foundational release.
+    MM:SS.mmm
 
-Future revisions will prioritize backward compatibility.
+Examples:
 
-------------------------------------------------------------------------
+    03:15.200
+    142:04.900
 
-## Goals
-
--   Provide a universal plain-text lyric format
--   Bridge traditional production and AI generation
--   Enable tool integration
--   Remain simple enough to survive long-term
+Minutes may contain **one or more digits** to support long performances.
 
 ------------------------------------------------------------------------
 
-## License
+# Design Principles
 
-Copyright 2026 Jade Rigby
+EPIC follows several core principles.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+### Plain Text
 
-    http://www.apache.org/licenses/LICENSE-2.0
+Files remain readable and editable in any text editor.
+
+### Deterministic Grammar
+
+The format avoids ambiguous syntax to simplify parsing.
+
+### Separation of Concerns
+
+`.epic` focuses on **authoring**, while `.epicx` focuses on **timed
+performance**.
+
+### AI Compatibility
+
+Generation metadata and instructions integrate with AI music systems.
+
+### Extensibility
+
+Unknown properties or instructions may be safely ignored by parsers.
 
 ------------------------------------------------------------------------
 
-## Contributing
+# Potential Use Cases
 
-Contributions, discussion, and implementation experiments are welcome.
+EPIC can support many workflows:
 
-This format is intended to evolve with the industry --- without losing
-its simplicity.
+-   AI music generation
+-   lyric writing
+-   synchronized lyrics
+-   lyric videos
+-   karaoke systems
+-   stage cue systems
+-   spoken word performances
+-   subtitle conversion
+
+------------------------------------------------------------------------
+
+# Implementation
+
+Because EPIC is plain text, implementing a parser typically requires:
+
+1.  Header parsing
+2.  Section detection
+3.  Instruction block parsing
+4.  Optional timing interpretation
+
+No binary formats or complex dependencies are required.
+
+------------------------------------------------------------------------
+
+# Future Tooling
+
+Possible tools around EPIC include:
+
+-   EPIC‑aware lyric editors
+-   AI generation import tools
+-   subtitle converters
+-   lyric video generators
+-   DAW plugins
+-   synchronization tools
+
+------------------------------------------------------------------------
+
+# License
+
+EPIC is intended to be an **open specification** for creative and
+technical communities.
