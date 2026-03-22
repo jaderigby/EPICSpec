@@ -91,37 +91,165 @@ Supports attribution, licensing, and collaboration.
 
 ## 🎭 Emotives Module
 
-EPIC includes a canonical **Emotives module** for expressing *perceptual
-intent*.
+EPIC includes a canonical **Emotives module** --- a universal vocabulary
+for expressing **perceptual intent**.
 
-Emotives describe **how something should feel**, not how it is
-implemented.
+Emotives do not prescribe *how* something is implemented.
 
-Examples:
+They describe:
 
-    {{energetic, swell, reveal}}
-    {{calm, drift, fade}}
-    {{strong, emphasis}}
+> **how something should feel**
 
-Emotives are organized into independent axes:
+This allows the same EPIC file to drive: - typography - animation -
+lighting - particle systems - AI generation
 
--   Energy → energetic ↔ calm\
--   Motion → rise ↔ fall, converge ↔ drift\
--   Dynamics → swell ↔ decay\
--   Atmosphere → dark ↔ light\
--   Visibility → reveal ↔ fade\
--   Distortion → warp ↔ blur\
--   Motion Quality → smooth ↔ turbulent\
--   Timing → tight ↔ loose
+------------------------------------------------------------------------
 
-With modifiers:
+## 🧠 The Model
 
--   strong\
--   emphasis\
--   diminish
+Emotives are organized as **independent axes**.
 
-They form a **universal expressive vocabulary** across domains
-fileciteturn1file0
+Each axis represents a dimension of perception.
+
+You can combine them freely.
+
+------------------------------------------------------------------------
+
+## 🔁 Core Axes
+
+### Energy
+
+-   energetic ↔ calm
+
+Controls activity level and intensity.
+
+------------------------------------------------------------------------
+
+### Movement (Direction)
+
+-   rise ↔ fall\
+-   converge ↔ drift
+
+Describes directional motion and flow.
+
+------------------------------------------------------------------------
+
+### Dynamics (Intensity Envelope)
+
+-   swell ↔ decay
+
+Controls buildup vs release.
+
+------------------------------------------------------------------------
+
+### Atmosphere
+
+-   dark ↔ light
+
+Defines tonal weight and mood.
+
+------------------------------------------------------------------------
+
+### Visibility
+
+-   reveal ↔ fade
+
+Controls perceptual emergence and disappearance.
+
+------------------------------------------------------------------------
+
+### Distortion
+
+-   warp ↔ blur
+
+Alters clarity, structure, or meaning.
+
+------------------------------------------------------------------------
+
+### Motion Quality
+
+-   smooth ↔ turbulent
+
+Defines regular vs chaotic motion.
+
+------------------------------------------------------------------------
+
+### Timing Feel
+
+-   tight ↔ loose
+
+Controls alignment to rhythm or timing.
+
+------------------------------------------------------------------------
+
+## 🎯 Modifiers (Semantic Focus)
+
+These do NOT describe motion.
+
+They describe **importance**:
+
+-   strong → primary anchor\
+-   emphasis → increased prominence\
+-   diminish → reduced prominence
+
+------------------------------------------------------------------------
+
+## 🧩 Example Combinations
+
+``` epic
+{{energetic, swell, reveal}}
+{{calm, drift, fade}}
+{{dark, warp, turbulent}}
+{{strong, emphasis}}
+```
+
+These combinations form a **multi-dimensional intent vector**.
+
+------------------------------------------------------------------------
+
+## ⚙️ Why This Matters
+
+Instead of saying:
+
+-   "make the text bigger"
+-   "add glow"
+-   "increase motion"
+
+You say:
+
+``` epic
+{{strong, energetic, swell}}
+```
+
+And the system interprets it.
+
+------------------------------------------------------------------------
+
+## 🔄 Key Idea
+
+> Emotives separate **intent** from **implementation**
+
+This enables:
+
+-   cross-platform consistency\
+-   renderer flexibility\
+-   AI alignment\
+-   future-proof design
+
+------------------------------------------------------------------------
+
+## 🚀 In Practice
+
+Creators: - describe feeling and evolution
+
+Developers: - map emotives → visuals / behavior
+
+------------------------------------------------------------------------
+
+## 🧠 One Line
+
+> Emotives are the **emotional coordinate system of EPIC**
+
 
 ------------------------------------------------------------------------
 
@@ -202,6 +330,109 @@ EPIC is a foundation layer for:
 -   AI systems\
 -   rendering engines\
 -   cross-platform content pipelines
+
+------------------------------------------------------------------------
+
+# ⚡ First 60 Seconds with EPIC
+
+## 1. Create a file
+
+song.epic
+
+## 2. Paste this
+
+``` epic
+---
+Title: My First EPIC Song
+Artist: You
+---
+
+[Verse]
+Hello world
+
+[Chorus {{energetic, swell}}]
+This is EPIC
+```
+
+## 3. You just used:
+
+-   Structure
+-   Authorship
+-   Instruction blocks
+
+## 4. Add a cue
+
+``` epic
+{{lights dim}}
+```
+
+## 5. Add timing (optional)
+
+``` epicx
+1
+00:01.000
+[Verse]
+Hello world
+```
+
+------------------------------------------------------------------------
+
+# 🧭 Who EPIC Is For
+
+EPIC sits at the intersection of **creativity and systems**.
+
+------------------------------------------------------------------------
+
+## 👨‍💻 Why Developers Care
+
+-   Deterministic grammar\
+-   Plain text\
+-   Predictable parsing\
+-   Extensible instruction system
+
+### Example
+
+``` epic
+[Chorus {{energetic, swell}}]
+Right here — right now
+```
+
+------------------------------------------------------------------------
+
+## 🎨 Why Creators Care
+
+-   One file for everything\
+-   Expressive control\
+-   AI-ready\
+-   Timing + direction unified
+
+### Example
+
+``` epic
+[Verse {{calm, drift}}]
+Standing in the pulse of a neon light
+
+{{lights dim}}
+```
+
+------------------------------------------------------------------------
+
+## 🔄 Where They Meet
+
+  Creators write   Developers interpret
+  ---------------- ----------------------
+  {{energetic}}    animation intensity
+  {{lights dim}}   lighting trigger
+  @00:51.000       timeline event
+
+------------------------------------------------------------------------
+
+# 🧩 Core Concepts
+
+-   Instruction blocks → {{ }}\
+-   Emotives → expressive vocabulary\
+-   Micro-events → precise timing\
+-   .epic vs .epicx separation
 
 ------------------------------------------------------------------------
 
