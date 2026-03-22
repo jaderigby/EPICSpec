@@ -1,0 +1,14 @@
+{
+  "name": "epic-parser",
+  "version": "1.0.0",
+  "description": "Parser, validator, and stringifier for .epic and .epicx",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "test": "node ./test.mjs"
+  },
+  "license": "Apache-2.0"
+}

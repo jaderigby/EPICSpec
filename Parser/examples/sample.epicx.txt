@@ -1,0 +1,17 @@
+---
+Title: Test Song
+Author: Jade
+---
+
+1
+00:35.000
+[Verse]
+Hello world
+@00:35.200 {{lights dim}}
+
+2
+00:38.000 --> 00:40.000
+[Chorus]
+{{vocals: choir}}
+Another line
+@ {{fire pops}}

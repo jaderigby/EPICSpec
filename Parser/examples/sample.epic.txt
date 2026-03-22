@@ -1,0 +1,18 @@
+---
+Title: Test Song
+Author: Jade
+Version: Draft
+
+[Generation]
+Styles: ambient, dark, electronic
+Weirdness: 0.75
+Energy: 1
+---
+
+[Verse]
+Hello world
+{{guitar solo}}
+The Emerald Sea {{male singer}}
+
+[Verse 2 {{softly}}]
+Another line
