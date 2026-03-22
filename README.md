@@ -1,336 +1,221 @@
-# EPIC Format
+# 🚀 EPIC --- A Universal Language for Creative Direction
 
-**EPIC (Extended Performance & Intelligence Cues)** is a lightweight,
-human‑readable format for writing, generating, and performing structured
-lyrics and timed performance cues.
+![Version](https://img.shields.io/badge/version-1.0-blue)
+![Spec](https://img.shields.io/badge/spec-open-lightgrey)
+![Format](https://img.shields.io/badge/format-plain--text-green)
+![Status](https://img.shields.io/badge/status-active-success)
+![License](https://img.shields.io/badge/license-Apache%202.0-blue)
 
-EPIC bridges the gap between:
+> **Write once. Render anywhere.**
 
--   lyric writing
--   AI music generation prompts
--   subtitle / cue formats
--   performance timing systems
-
-while remaining **plain text, deterministic, and version‑control
-friendly**.
+**EPIC (Extended Performance & Intelligent Cues)** is a lightweight,
+human-readable language for expressing **creative intent, structure, and
+timing** across mediums.
 
 ------------------------------------------------------------------------
 
-# Quick Start
+## ⭐ Why EPIC
 
-Create a file called:
+Creative workflows are fragmented.
 
-    song.epic
+-   Lyrics in one tool\
+-   Timing in another\
+-   AI prompts somewhere else\
+-   Rendering somewhere else
 
-Example:
+EPIC unifies all of it into a **single source of truth**:
 
-    ---
-    Title: Elem-en Ellow Vo
-    Artist: Kozzality
-    BPM: 128
-    Tags: techno, hypnotic
-    Production:
-    Warehouse reverb
-    Dry analog kick
-
-    [Generation]
-    Styles:
-    1. Deep hypnotic minimal techno
-    2. Dark warehouse techno
-
-    UseStyle: 1
-    Persona: Female vocalist
-    Energy: 0.75
-    ---
-
-    [Verse]
-    Standing in the pulse of a neon light
-
-    [Chorus]
-    Right here — right now
-
-This file can be used for:
-
--   lyric writing
--   AI music generation prompts
--   structured song documentation
-
-Later it can be aligned to timing using:
-
-    song.epicx
+> Structure + Meaning + Timing
 
 ------------------------------------------------------------------------
 
-# Overview
+## 🔥 What Makes EPIC Different
 
-EPIC defines two complementary formats.
+Most formats describe *what something is*.
 
-  -----------------------------------------------------------------------
-  Format                              Purpose
-  ----------------------------------- -----------------------------------
-  `.epic`                             Authoring format for lyrics,
-                                      structure, and generation metadata
+EPIC describes:
 
-  `.epicx`                            Timed performance format for lyric
-                                      synchronization and cues
-  -----------------------------------------------------------------------
-
-This separation allows creators to write lyrics first and align timing
-later.
+> **what it should feel like, how it should behave, and when it should
+> happen**
 
 ------------------------------------------------------------------------
 
-# Why EPIC Exists
+## 🧩 Core Concepts
 
-Modern music workflows span multiple environments:
+### 1. Two Formats
 
--   AI music generation
--   DAWs
--   collaboration tools
--   Git repositories
--   subtitle systems
--   lyric video tools
-
-Existing formats usually support only **one part** of this workflow.
-
-EPIC aims to provide a single format that supports:
-
--   human readability
--   machine parsing
--   AI prompt integration
--   lyric structure
--   performance timing
--   extensibility
+  Format     Purpose
+  ---------- ----------------------------------
+  `.epic`    Authoring (structure + intent)
+  `.epicx`   Execution (timing + performance)
 
 ------------------------------------------------------------------------
 
-# Key Features
-
-## Structured Song Sections
-
-    [Verse]
-    Standing in the pulse of a neon light
-
-    [Chorus]
-    Right here, right now
-
-Supported section styles include:
-
--   Verse
--   Chorus
--   Bridge
--   Intro
--   Outro
--   Final Chorus
-
-------------------------------------------------------------------------
-
-## Generation Metadata
-
-The `[Generation]` block contains parameters useful for AI music
-generation.
-
-    [Generation]
-    Styles:
-    1. Deep hypnotic minimal techno
-    2. Dark warehouse techno
-
-    UseStyle: 1
-    Persona: Female vocalist
-    Energy: 0.75
-
-AI systems can automatically populate generation inputs from these
-fields.
-
-------------------------------------------------------------------------
-
-## Production Notes
-
-Production notes describe sonic or musical intent.
-
-    Production:
-    Warehouse reverb
-    Dry analog kick
-    Long evolving pads
-
-Production blocks must contain **at least one non‑empty line**.
-
-------------------------------------------------------------------------
-
-## Instruction Blocks
-
-EPIC distinguishes between **lyrics** and **instructions** using double
-curly braces.
+### 2. Instruction Blocks
 
     {{ instruction }}
 
-Instruction blocks may appear as:
+The core primitive of EPIC.
 
-  Type            Example
-  --------------- ----------------------------
-  Sectional       `[Verse {{choral chant}}]`
-  Contextual      `tear {{ipa: /tɛr/}}`
-  Instructional   `{{big drop}}`
-  Timestamp       `word{{00:48.633}}`
-
-Instruction items may be:
-
--   phrases
--   key/value pairs
--   timestamps
-
-Example:
-
-    {{ipa: /tɛr/, whispered}}
-
-------------------------------------------------------------------------
-
-## Word-Level Timing
-
-`.epicx` supports precise lyric synchronization.
-
-Example:
-
-    tear{{00:48.633}} fell{{00:48.800}} from{{00:48.900}} my{{00:49.000}} eye{{00:49.200}}
-
-This enables:
-
--   karaoke rendering
--   lyric video generation
--   vocal alignment
--   performance cues
-
-------------------------------------------------------------------------
-
-# Example `.epic`
-
-    ---
-    Title: Elem-en Ellow Vo
-    Artist: Kozzality
-    BPM: 128
-    Tags: techno, hypnotic
-    Production:
-    Warehouse reverb
-    Dry analog kick
-
-    [Generation]
-    Styles:
-    1. Deep hypnotic minimal techno
-    2. Dark warehouse techno
-
-    UseStyle: 1
-    Persona: Female vocalist
-    Energy: 0.75
-    ---
-
-    [Verse]
-    Standing in the pulse of a neon light
-
-    [Chorus]
-    Right here — right now
-
-------------------------------------------------------------------------
-
-# Example `.epicx`
-
-    1
-    00:48.633
-    [Verse]
-    Standing{{00:48.633}} in{{00:48.800}} the{{00:48.900}} pulse{{00:49.200}}
-
-    2
-    00:51.000
-    [Chorus]
-    Right{{00:51.000}} here{{00:51.200}} right{{00:51.400}} now{{00:51.600}}
-
-Entries are separated by **exactly one blank line**.
-
-------------------------------------------------------------------------
-
-# Timestamp Format
-
-EPIC uses a deterministic timestamp format:
-
-    MM:SS.mmm
+-   Human-readable\
+-   Machine-parseable\
+-   Context-aware
 
 Examples:
 
-    03:15.200
-    142:04.900
-
-Minutes may contain **one or more digits** to support long performances.
-
-------------------------------------------------------------------------
-
-# Design Principles
-
-EPIC follows several core principles.
-
-### Plain Text
-
-Files remain readable and editable in any text editor.
-
-### Deterministic Grammar
-
-The format avoids ambiguous syntax to simplify parsing.
-
-### Separation of Concerns
-
-`.epic` focuses on **authoring**, while `.epicx` focuses on **timed
-performance**.
-
-### AI Compatibility
-
-Generation metadata and instructions integrate with AI music systems.
-
-### Extensibility
-
-Unknown properties or instructions may be safely ignored by parsers.
+    {{whispered}}
+    {{camera: slow zoom}}
+    {{social: like-subscribe}}
 
 ------------------------------------------------------------------------
 
-# Potential Use Cases
+### 3. Micro-Events
 
-EPIC can support many workflows:
+Precise, scoped timing events:
 
--   AI music generation
--   lyric writing
--   synchronized lyrics
--   lyric videos
--   karaoke systems
--   stage cue systems
--   spoken word performances
--   subtitle conversion
+    @00:51.000 {{lights dim}}
+    @00:52.000 {{cello swells}}
 
 ------------------------------------------------------------------------
 
-# Implementation
+### 4. Structured Authorship
 
-Because EPIC is plain text, implementing a parser typically requires:
+Required and deterministic:
 
-1.  Header parsing
-2.  Section detection
-3.  Instruction block parsing
-4.  Optional timing interpretation
+    Title: ...
+    Artist: ...
 
-No binary formats or complex dependencies are required.
+Supports attribution, licensing, and collaboration.
 
 ------------------------------------------------------------------------
 
-# Future Tooling
+## 🎭 Emotives Module
 
-Possible tools around EPIC include:
+EPIC includes a canonical **Emotives module** for expressing *perceptual
+intent*.
 
--   EPIC‑aware lyric editors
--   AI generation import tools
--   subtitle converters
--   lyric video generators
--   DAW plugins
--   synchronization tools
+Emotives describe **how something should feel**, not how it is
+implemented.
+
+Examples:
+
+    {{energetic, swell, reveal}}
+    {{calm, drift, fade}}
+    {{strong, emphasis}}
+
+Emotives are organized into independent axes:
+
+-   Energy → energetic ↔ calm\
+-   Motion → rise ↔ fall, converge ↔ drift\
+-   Dynamics → swell ↔ decay\
+-   Atmosphere → dark ↔ light\
+-   Visibility → reveal ↔ fade\
+-   Distortion → warp ↔ blur\
+-   Motion Quality → smooth ↔ turbulent\
+-   Timing → tight ↔ loose
+
+With modifiers:
+
+-   strong\
+-   emphasis\
+-   diminish
+
+They form a **universal expressive vocabulary** across domains
+fileciteturn1file0
 
 ------------------------------------------------------------------------
 
-# License
+## 🚀 Quick Example
 
-EPIC is intended to be an **open specification** for creative and
-technical communities.
+``` epic
+---
+Title: Elem-en Ellow Vo
+Artist: Kozzality
+BPM: 128
+Tags: techno, hypnotic
+
+[Generation]
+Styles:
+1. Deep hypnotic minimal techno
+2. Dark warehouse techno
+
+UseStyle: 1
+Energy: 0.75
+---
+
+[Verse {{calm, drift}}]
+Standing in the pulse of a neon light
+
+{{lights dim}}
+
+[Chorus {{energetic, swell, reveal}}]
+Right here — right now
+```
+
+------------------------------------------------------------------------
+
+## 🧠 Where EPIC Fits
+
+EPIC is domain-agnostic:
+
+-   🎵 Music & lyrics\
+-   🎬 Video & animation\
+-   🤖 AI generation\
+-   🎭 Live performance\
+-   🧩 Creative pipelines
+
+------------------------------------------------------------------------
+
+## ⚙️ Parser Included
+
+This repo includes a reference parser.
+
+Use it to:
+
+-   validate EPIC files\
+-   enforce grammar\
+-   build tooling\
+-   integrate into pipelines
+
+------------------------------------------------------------------------
+
+## 📦 Adoption Strategy
+
+You don't need full implementation.
+
+Start by using EPIC as:
+
+-   metadata\
+-   prompt structure\
+-   timing format\
+-   creative direction layer
+
+Adopt incrementally.
+
+------------------------------------------------------------------------
+
+## 🌱 Vision
+
+EPIC is a foundation layer for:
+
+-   creative tooling\
+-   AI systems\
+-   rendering engines\
+-   cross-platform content pipelines
+
+------------------------------------------------------------------------
+
+## ⭐ Support & Adoption
+
+If EPIC is useful to you:
+
+-   ⭐ Star the repo\
+-   🧪 Build with it\
+-   🧩 Integrate it\
+-   📢 Share it
+
+------------------------------------------------------------------------
+
+## 📜 License
+
+Apache 2.0
