@@ -11,5 +11,6 @@ Exports:
 
 It runs directly in Node as plain ESM JavaScript, with no build step.
 
-Example: node test-runner.js path/to/file.[epic | epicx]
+Example: node ./Parser/test-runner.mjs path/to/file.[epic | epicx]
 
+Run this to test: node ./Parser/test-runner.mjs Examples/Elem-en_Ellow_Vo.lyric
