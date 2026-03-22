@@ -26,11 +26,9 @@ Example:
 
     ---
     Title: Elem-en Ellow Vo
-    Author: Jade Rigby
-
+    Artist: Kozzality
     BPM: 128
     Tags: techno, hypnotic
-
     Production:
     Warehouse reverb
     Dry analog kick
@@ -208,11 +206,9 @@ This enables:
 
     ---
     Title: Elem-en Ellow Vo
-    Author: Jade Rigby
-
+    Artist: Kozzality
     BPM: 128
     Tags: techno, hypnotic
-
     Production:
     Warehouse reverb
     Dry analog kick
