@@ -49,6 +49,7 @@ export function parseHeader(cursor) {
   let generation = null;
   let collectingProduction = false;
   let productionLines = [];
+  let lastTrimmed = null;
 
   while (!cursor.eof()) {
     const lineNumber = cursor.lineNumber();
@@ -56,6 +57,8 @@ export function parseHeader(cursor) {
     if (line === null) break;
 
     const trimmed = line.trim();
+    const previousTrimmed = lastTrimmed;
+    lastTrimmed = trimmed;
 
     if (trimmed === "---") {
       finalizeProduction();
@@ -63,11 +66,24 @@ export function parseHeader(cursor) {
     }
 
     if (trimmed === "[Generation]") {
+      if (previousTrimmed !== "") {
+        issues.push(
+          makeIssue(
+            "MISSING_GENERATION_SEPARATOR",
+            "[Generation] must be preceded by a single empty line.",
+            lineNumber,
+            "error"
+          )
+        );
+      }
+
       finalizeProduction();
       rawOrder.push("Generation");
+
       const parsedGeneration = parseGenerationBlock(cursor);
       generation = parsedGeneration.block;
       issues.push(...parsedGeneration.issues);
+
       continue;
     }
 

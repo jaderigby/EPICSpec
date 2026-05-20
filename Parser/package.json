@@ -8,7 +8,8 @@
     ".": "./src/index.js"
   },
   "scripts": {
-    "test": "node ./test.mjs"
+    "test": "node ./test-runner.mjs ./examples/Elem-en_Ellow_Vo.epicx",
+    "serve": "serve . -l 8080"
   },
   "license": "Apache-2.0"
 }

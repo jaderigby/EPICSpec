@@ -70,7 +70,6 @@ function parseEpicxEntry(cursor) {
     const trimmed = line.trim();
 
     if (trimmed === "") {
-      cursor.next();
       break;
     }
 
@@ -102,6 +101,18 @@ function parseEpicxEntry(cursor) {
   }
 
   flushTextBlock(payload, currentTextLines);
+
+  if (payload.length === 0 && microEvents.length === 0) {
+    issues.push(
+      makeIssue(
+        "EMPTY_TIMED_ENTRY",
+        "Timed entry must contain at least one lyric line, instruction, or micro-event.",
+        startLine,
+        "error",
+        { index }
+      )
+    );
+  }
 
   return {
     entry: {
