@@ -18,6 +18,11 @@ function validateHeader(header) {
   const issues = [];
   const authorshipKeys = ["Creator", "Author", "Artist"];
 
+  if (!header) {
+    issues.push(makeIssue("MISSING_HEADER", "Document header is missing.", 0));
+    return issues;
+  }
+
   const candidates = authorshipKeys
     .filter((key) => header.fields[key] !== undefined && String(header.fields[key]).trim() !== "")
     .map((key) => ({ role: key, value: header.fields[key] }));
@@ -32,11 +37,6 @@ function validateHeader(header) {
         { requiredAnyOf: authorshipKeys }
       )
     );
-  }
-  
-  if (!header) {
-    issues.push(makeIssue("MISSING_HEADER", "Document header is missing.", 0));
-    return issues;
   }
 
   const fields = header.fields || {};

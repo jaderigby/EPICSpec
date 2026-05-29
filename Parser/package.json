@@ -5,8 +5,26 @@
   "type": "module",
   "main": "./src/index.js",
   "exports": {
-    ".": "./src/index.js"
+    ".": "./src/index.js",
+    "./epic": "./src/epic.js",
+    "./epicx": "./src/epicx.js",
+    "./document": "./src/document.js",
+    "./instruction": "./src/instruction.js",
+    "./section": "./src/section.js",
+    "./time": "./src/time.js",
+    "./stringify": "./src/stringify.js",
+    "./validate": "./src/validate.js"
   },
+  "bin": {
+    "epic-parser": "test-runner.mjs"
+  },
+  "files": [
+    "src",
+    "examples",
+    "test-runner.mjs",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "test": "node ./test-runner.mjs ./examples/Elem-en_Ellow_Vo.epicx",
     "serve": "serve . -l 8080"
