@@ -18,9 +18,9 @@ timing** across mediums.
 
 Creative workflows are fragmented.
 
--   Lyrics in one tool\
--   Timing in another\
--   AI prompts somewhere else\
+-   Lyrics in one tool
+-   Timing in another
+-   AI prompts somewhere else
 -   Rendering somewhere else
 
 EPIC unifies all of it into a **single source of truth**:
@@ -57,8 +57,8 @@ EPIC describes:
 
 The core primitive of EPIC.
 
--   Human-readable\
--   Machine-parseable\
+-   Human-readable
+-   Machine-parseable
 -   Context-aware
 
 Examples:
@@ -127,7 +127,7 @@ Controls activity level and intensity.
 
 ### Movement (Direction)
 
--   rise ↔ fall\
+-   rise ↔ fall
 -   converge ↔ drift
 
 Describes directional motion and flow.
@@ -188,8 +188,8 @@ These do NOT describe motion.
 
 They describe **importance**:
 
--   strong → primary anchor\
--   emphasis → increased prominence\
+-   strong → primary anchor
+-   emphasis → increased prominence
 -   diminish → reduced prominence
 
 ------------------------------------------------------------------------
@@ -231,9 +231,9 @@ And the system interprets it.
 
 This enables:
 
--   cross-platform consistency\
--   renderer flexibility\
--   AI alignment\
+-   cross-platform consistency
+-   renderer flexibility
+-   AI alignment
 -   future-proof design
 
 ------------------------------------------------------------------------
@@ -286,10 +286,10 @@ Right here — right now
 
 EPIC is domain-agnostic:
 
--   🎵 Music & lyrics\
--   🎬 Video & animation\
--   🤖 AI generation\
--   🎭 Live performance\
+-   🎵 Music & lyrics
+-   🎬 Video & animation
+-   🤖 AI generation
+-   🎭 Live performance
 -   🧩 Creative pipelines
 
 ------------------------------------------------------------------------
@@ -300,9 +300,9 @@ This repo includes a reference parser.
 
 Use it to:
 
--   validate EPIC files\
--   enforce grammar\
--   build tooling\
+-   validate EPIC files
+-   enforce grammar
+-   build tooling
 -   integrate into pipelines
 
 ------------------------------------------------------------------------
@@ -313,9 +313,9 @@ You don't need full implementation.
 
 Start by using EPIC as:
 
--   metadata\
--   prompt structure\
--   timing format\
+-   metadata
+-   prompt structure
+-   timing format
 -   creative direction layer
 
 Adopt incrementally.
@@ -326,9 +326,9 @@ Adopt incrementally.
 
 EPIC is a foundation layer for:
 
--   creative tooling\
--   AI systems\
--   rendering engines\
+-   creative tooling
+-   AI systems
+-   rendering engines
 -   cross-platform content pipelines
 
 ------------------------------------------------------------------------
@@ -385,9 +385,9 @@ EPIC sits at the intersection of **creativity and systems**.
 
 ## 👨‍💻 Why Developers Care
 
--   Deterministic grammar\
--   Plain text\
--   Predictable parsing\
+-   Deterministic grammar
+-   Plain text
+-   Predictable parsing
 -   Extensible instruction system
 
 ### Example
@@ -401,9 +401,9 @@ Right here — right now
 
 ## 🎨 Why Creators Care
 
--   One file for everything\
--   Expressive control\
--   AI-ready\
+-   One file for everything
+-   Expressive control
+-   AI-ready
 -   Timing + direction unified
 
 ### Example
@@ -429,9 +429,9 @@ Standing in the pulse of a neon light
 
 # 🧩 Core Concepts
 
--   Instruction blocks → {{ }}\
--   Emotives → expressive vocabulary\
--   Micro-events → precise timing\
+-   Instruction blocks → {{ }}
+-   Emotives → expressive vocabulary
+-   Micro-events → precise timing
 -   .epic vs .epicx separation
 
 ------------------------------------------------------------------------
@@ -440,9 +440,9 @@ Standing in the pulse of a neon light
 
 If EPIC is useful to you:
 
--   ⭐ Star the repo\
--   🧪 Build with it\
--   🧩 Integrate it\
+-   ⭐ Star the repo
+-   🧪 Build with it
+-   🧩 Integrate it
 -   📢 Share it
 
 ------------------------------------------------------------------------
