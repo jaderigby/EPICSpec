@@ -447,6 +447,18 @@ If EPIC is useful to you:
 
 ------------------------------------------------------------------------
 
+## Visual Studio Code extension
+
+The specification includes [VS Code language tooling](VSCode/README.md) for `.epic` and `.epicx` files, with theme-aware syntax highlighting and an optional EPIC Blackberries theme.
+
+1. The extension is located in the repo: VSCode/epic-media-writer-highlighter-*.*.*.vsix
+2. In VS Code, choose **Extensions → … → Install from VSIX…** and select this file.
+3. Use your preferred theme, or select **EPIC Blackberries** for the EPIC Media Writer™ palette.
+
+The [extension source, examples, and compatibility tests](VSCode/) are included. See its README for build instructions. This is editor support; the specification and parser define and validate the language.
+
+------------------------------------------------------------------------
+
 ## 📜 License
 
 Apache 2.0

@@ -1,0 +1,13 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@epic-effect",
+      "description": "Defines a named EPIC motion effect for themes."
+    }
+  ],
+  "properties": [
+    { "name": "velocity", "description": "Motion block for an EPIC effect." },
+    { "name": "speed", "description": "Effect speed." }
+  ]
+}

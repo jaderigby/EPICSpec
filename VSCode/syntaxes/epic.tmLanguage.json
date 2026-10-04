@@ -1,0 +1,140 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "EPIC Media",
+  "scopeName": "text.epic",
+  "patterns": [
+    {
+      "include": "#header"
+    },
+    {
+      "include": "#freeflow"
+    },
+    {
+      "include": "#section"
+    },
+    {
+      "name": "constant.numeric.entry.epic",
+      "match": "^\\s*\\d+\\s*$"
+    },
+    {
+      "include": "#inline"
+    }
+  ],
+  "repository": {
+    "header": {
+      "name": "meta.header.epic",
+      "begin": "\\A\\s*---\\s*$",
+      "end": "^\\s*---\\s*$",
+      "patterns": [
+        {
+          "name": "markup.heading.generation.epic",
+          "match": "^\\s*\\[Generation\\]\\s*$"
+        },
+        {
+          "match": "^([A-Za-z][A-Za-z0-9_-]*)(:)(.*)$",
+          "captures": {
+            "1": {
+              "name": "entity.other.attribute-name.header.epic"
+            },
+            "2": {
+              "name": "punctuation.separator.key-value.epic"
+            },
+            "3": {
+              "name": "string.unquoted.header.epic",
+              "patterns": [
+                {
+                  "include": "#inline"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "string.unquoted.header.epic",
+          "match": ".+"
+        }
+      ]
+    },
+    "freeflow": {
+      "name": "markup.quote.freeflow.epic",
+      "begin": "^\\s*\\[\\s*\\{&\\}.*\\]\\s*$",
+      "beginCaptures": {
+        "0": {
+          "name": "markup.heading.freeflow.epic"
+        }
+      },
+      "end": "^\\s*:::\\s*$",
+      "endCaptures": {
+        "0": {
+          "name": "markup.heading.freeflow.epic"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#inline"
+        }
+      ]
+    },
+    "section": {
+      "name": "markup.heading.section.epic",
+      "begin": "^\\s*\\[(?=[^\\]\\n]+\\]\\s*$)",
+      "end": "\\]\\s*$",
+      "patterns": [
+        {
+          "name": "keyword.control.section-instruction.epic",
+          "begin": "\\{\\{(?!&\\})",
+          "end": "\\}\\}"
+        },
+        {
+          "include": "#inline"
+        }
+      ]
+    },
+    "inline": {
+      "patterns": [
+        {
+          "name": "comment.block.freeform.epic",
+          "begin": "\\{\\{&\\}",
+          "end": "\\}\\}"
+        },
+        {
+          "name": "keyword.control.instruction.epic",
+          "begin": "\\{\\{",
+          "end": "\\}\\}"
+        },
+        {
+          "name": "constant.numeric.timestamp.epic",
+          "match": "\\b\\d{2}:\\d{2}(?::\\d{2})?\\.\\d{3}\\b"
+        },
+        {
+          "name": "punctuation.separator.time-range.epic",
+          "match": "-->"
+        },
+        {
+          "name": "markup.raw.inline.epic",
+          "match": "`[^`\\n]+`"
+        },
+        {
+          "name": "markup.bold.epic",
+          "match": "\\*\\*[^*\\n]+\\*\\*"
+        },
+        {
+          "name": "markup.italic.epic",
+          "match": "(?<!\\*)\\*[^*\\n]+\\*(?!\\*)"
+        },
+        {
+          "name": "string.other.link.image.epic",
+          "match": "!\\[[^\\]\\n]*\\]\\([^\\)\\n]+\\)"
+        },
+        {
+          "name": "markup.underline.link.epic",
+          "match": "\\[[^\\]\\n]*\\]\\([^\\)\\n]+\\)"
+        },
+        {
+          "name": "markup.list.epic",
+          "match": "^\\s*(?:[-*+]|\\d+\\.)\\s+"
+        }
+      ]
+    }
+  }
+}

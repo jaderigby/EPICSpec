@@ -1,6 +1,6 @@
 {
   "name": "epic-parser",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Parser, validator, and stringifier for .epic and .epicx",
   "type": "module",
   "main": "./src/index.js",
@@ -26,8 +26,9 @@
     "LICENSE"
   ],
   "scripts": {
-    "test": "node ./test-runner.mjs ./examples/Elem-en_Ellow_Vo.epicx",
-    "serve": "serve . -l 8080"
+    "test": "node --test tests/*.test.mjs",
+    "serve": "serve . -l 8080",
+    "test:example": "node ./test-runner.mjs ./examples/Elem-en_Ellow_Vo.epicx"
   },
   "license": "Apache-2.0"
 }

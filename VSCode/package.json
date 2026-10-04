@@ -1,0 +1,96 @@
+{
+  "name": "epic-media-writer-highlighter",
+  "displayName": "EPIC Media Writer™ Highlighter",
+  "description": "EPIC and EPICX syntax highlighting with the EPIC Media Writer Blackberries color theme.",
+  "version": "0.3.0",
+  "publisher": "epic-media-writer",
+  "author": "Jade C. Rigby",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Themes"
+  ],
+  "keywords": [
+    "epic",
+    "epicx",
+    "syntax",
+    "blackberries"
+  ],
+  "license": "Apache-2.0",
+  "contributes": {
+    "languages": [
+      {
+        "id": "epic",
+        "aliases": [
+          "EPIC Media",
+          "epic"
+        ],
+        "extensions": [
+          ".epic",
+          ".epicx"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "css.customData": [
+      "./epic-css-data.json"
+    ],
+    "grammars": [
+      {
+        "language": "epic",
+        "scopeName": "text.epic",
+        "path": "./syntaxes/epic.tmLanguage.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "EPIC Blackberries",
+        "uiTheme": "vs-dark",
+        "path": "./themes/blackberries-color-theme.json"
+      }
+    ],
+    "configurationDefaults": {
+      "[epic]": {
+        "editor.bracketPairColorization.enabled": false,
+        "editor.unicodeHighlight.allowedCharacters": {
+          "’": true,
+          "‘": true
+        },
+        "editor.tabCompletion": "onlySnippets"
+      }
+    },
+    "snippets": [
+      {
+        "language": "epic",
+        "path": "./snippets/epic.json"
+      }
+    ],
+    "configuration": {
+      "title": "EPIC",
+      "properties": {
+        "epic.autoNormalizePastedEntries": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "description": "Renumber EPICX entries after complete entries are inserted. Shift only inserted entries with duplicate start timestamps by two seconds until unused; preserve all existing timestamps and distinct close timestamps."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.cjs && node test/theme-compatibility.cjs",
+    "package": "vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "vscode-textmate": "^9.3.0",
+    "vscode-oniguruma": "^2.0.1",
+    "jsonc-parser": "^3.3.1",
+    "@vscode/vsce": "^3.6.0"
+  },
+  "main": "./src/extension.cjs",
+  "activationEvents": [
+    "onLanguage:epic"
+  ]
+}

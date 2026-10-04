@@ -57,8 +57,26 @@ function validateHeader(header) {
       }
     }
 
+    if (g.Styles?.mode === "multiple") {
+      if (g.Styles.separatorAfter !== undefined && g.Styles.separatorAfter !== 1) {
+        const lastOption = g.Styles.options.at(-1);
+        issues.push(makeIssue("INVALID_STYLES_TERMINATOR", "The last numbered style option must be followed by exactly one empty line.", lastOption?.loc?.startLine ?? 0));
+      }
+      for (const [index, option] of g.Styles.options.entries()) {
+        const line = option.loc?.startLine ?? 0;
+        if (index > 0 && option.separatorBefore !== undefined && option.separatorBefore !== 1) {
+          issues.push(makeIssue("INVALID_STYLE_OPTION_SEPARATOR", "Numbered style options must be separated by exactly one empty line.", line));
+        }
+        if (!Number.isSafeInteger(option.index) || option.index < 0) {
+          issues.push(makeIssue("INVALID_STYLE_OPTION_INDEX", "Style option indices must be non-negative safe integers.", line));
+        }
+      }
+    }
+
     if (g.UseStyle !== undefined) {
-      if (!g.Styles || g.Styles.mode !== "multiple") {
+      if (!Number.isSafeInteger(g.UseStyle) || g.UseStyle < 0) {
+        issues.push(makeIssue("INVALID_USESTYLE_VALUE", "UseStyle must be a non-negative integer identifying a style option.", 0));
+      } else if (!g.Styles || g.Styles.mode !== "multiple") {
         issues.push(makeIssue("USESTYLE_WITHOUT_MULTIPLE_STYLES", "UseStyle requires multiple Styles options.", 0));
       } else {
         const valid = g.Styles.options.some((option) => option.index === g.UseStyle);

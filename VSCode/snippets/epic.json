@@ -1,0 +1,28 @@
+{
+  "Freeflow section": {
+    "prefix": "ff",
+    "body": [
+      "[{&}$0]"
+    ],
+    "description": "Insert an EPIC freeflow section"
+  },
+  "Generation settings": {
+    "prefix": "gen",
+    "body": [
+      "[Generation]",
+      "Styles: $0"
+    ],
+    "description": "Insert Generation and Styles"
+  },
+  "Header fields": {
+    "prefix": "head",
+    "body": [
+      "---",
+      "Title: ${1:Untitled}",
+      "Artist: ${2:Me}",
+      "---",
+      "$0"
+    ],
+    "description": "Insert title and artist; Tab moves through each placeholder"
+  }
+}
