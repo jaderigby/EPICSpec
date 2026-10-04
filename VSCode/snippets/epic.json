@@ -15,14 +15,17 @@
     "description": "Insert Generation and Styles"
   },
   "Header fields": {
-    "prefix": "head",
+    "prefix": [
+      "head",
+      "hd"
+    ],
     "body": [
       "---",
       "Title: ${1:Untitled}",
-      "Artist: ${2:Me}",
+      "Author: ${2:Me}",
       "---",
       "$0"
     ],
-    "description": "Insert title and artist; Tab moves through each placeholder"
+    "description": "Insert title and authorship using remembered role and value"
   }
 }

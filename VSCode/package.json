@@ -2,7 +2,7 @@
   "name": "epic-media-writer-highlighter",
   "displayName": "EPIC Media Writer™ Highlighter",
   "description": "EPIC and EPICX syntax highlighting with the EPIC Media Writer Blackberries color theme.",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "publisher": "epic-media-writer",
   "author": "Jade C. Rigby",
   "engines": {
@@ -61,12 +61,6 @@
         "editor.tabCompletion": "onlySnippets"
       }
     },
-    "snippets": [
-      {
-        "language": "epic",
-        "path": "./snippets/epic.json"
-      }
-    ],
     "configuration": {
       "title": "EPIC",
       "properties": {
@@ -77,6 +71,37 @@
           "description": "Renumber EPICX entries after complete entries are inserted. Shift only inserted entries with duplicate start timestamps by two seconds until unused; preserve all existing timestamps and distinct close timestamps."
         }
       }
+    },
+    "commands": [
+      {
+        "command": "epic.expandSnippet",
+        "title": "EPIC: Expand Snippet"
+      },
+      {
+        "command": "epic.resetArtistMemory",
+        "title": "EPIC: Reset Authorship Memory"
+      },
+      {
+        "command": "epic.changeHeaderRole",
+        "title": "EPIC: Change Header Role…",
+        "enablement": "editorLangId == epic && epic.headerRoleSelected && !editorReadonly"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "epic.expandSnippet",
+        "key": "tab",
+        "when": "editorTextFocus && editorLangId == epic && !editorReadonly && !editorTabMovesFocus && !inSnippetMode && !suggestWidgetVisible && epic.snippetPrefix"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "epic.changeHeaderRole",
+          "when": "editorLangId == epic && epic.headerRoleSelected && !editorReadonly",
+          "group": "1_modification@20"
+        }
+      ]
     }
   },
   "scripts": {

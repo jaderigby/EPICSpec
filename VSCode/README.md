@@ -68,7 +68,7 @@ In an EPIC or EPICX file, type a prefix and press Tab:
 | --- | --- |
 | `ff` | `[{&}]`, with the cursor before the closing bracket |
 | `gen` | `[Generation]` followed by `Styles:` on the next line |
-| `head` | `Title: Untitled` and `Artist: Me`, enclosed by `---` lines |
+| `head` | `Title: Untitled` and `Author: Me`, enclosed by `---` lines |
 
 For `head`, **Untitled** is selected first. Tab selects **Me**, and another Tab finishes the snippet. Snippet Tab completion is enabled by default only for EPIC language mode; explicit user settings can override it.
 
@@ -83,3 +83,19 @@ Only **newly inserted** entries with a start timestamp exactly equal to another 
 Opening or saving a file does not repair it. Ordinary typing, timestamp-only edits, full-document replacements, undo, and redo do not trigger normalization. The repair is undoable; VS Code can use separate undo steps for the repair and the original paste. Undo does not immediately trigger the repair again. Repairs are applied only to the active editor, without saving the file.
 
 Disable **EPIC: Auto Normalize Pasted Entries** (`epic.autoNormalizePastedEntries`) in Settings to opt out. This is a convenience for complete numbered entry blocks, not a substitute for EPIC validation.
+
+## Remembered authorship
+
+New `head` / `hd` headers start with **Author: Me**. The first save of a complete header with exactly one nonempty `Author:`, `Creator:`, or `Artist:` field counts once per local EPIC file. Repeated saves do not count again. Opening files, incomplete headers, and headers with multiple authorship fields do not contribute.
+
+The **role** learns the most common key across those distinct files. A unique leader with at least three uses becomes the default. Ties retain the current default (initially Author). The **value** keeps the existing rule: three consecutive distinct files with the same value establish a preference, regardless of which role those files use. A learned value remains until another three-file sequence replaces it.
+
+Memory is local to the VS Code profile and persists across restarts. Existing learned values are preserved when upgrading; role counting starts with this version because prior versions did not record keys. Existing documents are never rewritten. **EPIC: Reset Authorship Memory** clears both histories and restores Author with the snippet’s default value.
+
+Templates remain in `snippets/epic.json`. Keep the authorship value as a numbered placeholder, such as `Author: ${2:Me}`. The extension fills in the learned role and value at expansion time. Tab selects Title first and the authorship value second. Source changes require rebuilding and reinstalling the extension.
+
+## Change header authorship role
+
+Click **Artist**, **Author**, or **Creator** inside the fenced header to open a picker of the other roles. No right-click or modifier key is required. Keyboard navigation does not open the picker. The right-click command **EPIC: Change Header Role…** remains available as an alternative. You can also press **Cmd+.** on macOS (**Ctrl+.** on Windows/Linux) for direct Quick Fix choices, or run the command from the Command Palette.
+
+Only the field name changes; its value and spacing remain intact. Roles already present elsewhere in the header are omitted to avoid duplicate fields. Body text and Generation settings are excluded. Escape cancels the popup, and a change can be undone normally. Authorship memory learns from any of the three roles.

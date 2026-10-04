@@ -1,6 +1,19 @@
 ---
-Title: Test Song
-Author: Jade
+Title: Even While I Bend
+Artist: Kozzality
+Version: 2
+Theme: Playit2
+Logo: rise-and-roar
+ArcMotion: mirrorBarsRefined
+Short: 0:55.689
+
+[Generation]
+Styles: 
+1. Early 80s post-punk, noir punk, minimalist, sparse live arrangement, repetitive melodic bassline carrying the song, simple steady acoustic drums, thin clean electric guitar playing restrained repeating figures, distant understated male vocal, raw dry production, lots of empty space between instruments, hypnotic repetition, melancholic but propulsive, primitive and human, very little overdubbing, no lush layers, no big synth pads, no modern indie-rock polish
+
+2. Early 80s post-punk, psychadelic, minimalist, sparse live arrangement, repetitive melodic bassline carrying the song, simple steady acoustic drums, thin clean electric guitar playing restrained repeating figures, distant understated male vocal, raw dry production, lots of empty space between instruments, synths should be sparce accents, hypnotic repetition, melancholic but propulsive, primitive and human, very little overdubbing, no lush layers, no modern indie-rock polish
+
+UseStyle: 1
 ---
 
 1

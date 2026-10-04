@@ -5,14 +5,14 @@
   "colors": {
     "foreground": "#EEEEEE",
     "focusBorder": "#46B5C4",
-    "selection.background": "#314A6280",
+    "selection.background": "#275882b0",
     "descriptionForeground": "#95AEC9",
     "errorForeground": "#FF8A8A",
     "editor.background": "#050505",
     "editor.foreground": "#F4F4F4",
     "editorCursor.foreground": "#8FE6C8",
     "editor.lineHighlightBackground": "#FFFFFF06",
-    "editor.selectionBackground": "#314A6299",
+    "editor.selectionBackground": "#3a84c999",
     "editor.inactiveSelectionBackground": "#314A6255",
     "editor.findMatchBackground": "#874CA188",
     "editor.findMatchHighlightBackground": "#874CA144",
@@ -83,7 +83,7 @@
     "tab.unfocusedActiveBackground": "#050505",
     "tab.unfocusedInactiveBackground": "#16293D",
     "tab.inactiveBackground": "#16293D",
-    "tab.border": "#214776",
+    "tab.border": "#26466e",
     "editorGroupHeader.tabsBackground": "#112030"
   },
   "tokenColors": [
