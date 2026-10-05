@@ -1,5 +1,6 @@
 'use strict';
 const vscode = require('vscode');
+const { offerDefaultLanguage } = require('./first-run.cjs');
 const { registerHeaderRoles } = require('./header-role-ui.cjs');
 const { registerSnippets } = require('./snippets.cjs');
 const { planNormalization } = require('./entry-normalization.cjs');
@@ -7,6 +8,7 @@ function isEpicx(document) {
   return document.languageId === 'epic' && /\.epicx(?:\.txt)?$/i.test(document.uri.path);
 }
 function activate(context) {
+  void offerDefaultLanguage(context).catch(error => console.error('EPIC first-run setup failed:', error));
   registerSnippets(context);
   registerHeaderRoles(context);
   const snapshots = new Map();

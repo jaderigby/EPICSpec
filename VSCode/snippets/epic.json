@@ -15,10 +15,7 @@
     "description": "Insert Generation and Styles"
   },
   "Header fields": {
-    "prefix": [
-      "head",
-      "hd"
-    ],
+    "prefix": "hd",
     "body": [
       "---",
       "Title: ${1:Untitled}",

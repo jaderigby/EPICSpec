@@ -17,10 +17,19 @@ function registerSnippets(context) {
       .catch(error => vscode.window.showWarningMessage(`EPIC authorship memory could not be saved: ${error.message}`));
     return writeQueue;
   }
+  function textBefore(document, position) {
+    // Document changes can arrive before the corresponding selection update.
+    // Skip stale positions rather than clamping them onto unrelated text.
+    if (document.isClosed || position.line < 0 || position.line >= document.lineCount) return null;
+    const text = document.lineAt(position.line).text;
+    if (position.character < 0 || position.character > text.length) return null;
+    return text.slice(0, position.character);
+  }
   function currentPrefix(editor) {
     if (!editor || editor.document.languageId !== 'epic' || editor.selections.length !== 1 || !editor.selection.isEmpty) return null;
     const position = editor.selection.active;
-    const before = editor.document.lineAt(position.line).text.slice(0, position.character);
+    const before = textBefore(editor.document, position);
+    if (before === null) return null;
     const match = /(?:^|\s)([A-Za-z][\w-]*)$/.exec(before);
     const item = match && snippets.find(s => s.prefix === match[1]);
     return item ? { item, range: new vscode.Range(position.line, position.character - item.prefix.length, position.line, position.character) } : null;
@@ -32,7 +41,8 @@ function registerSnippets(context) {
   context.subscriptions.push(
     vscode.languages.registerCompletionItemProvider('epic', {
       provideCompletionItems(document, position) {
-        const before = document.lineAt(position.line).text.slice(0, position.character);
+        const before = textBefore(document, position);
+        if (before === null) return [];
         const word = /[A-Za-z][\w-]*$/.exec(before)?.[0] || '';
         const range = new vscode.Range(position.line, position.character - word.length, position.line, position.character);
         return snippets.map(item => {

@@ -5,7 +5,7 @@ A VS Code extension with EPIC / EPICX syntax highlighting and an optional **Blac
 ## Install
 
 1. In VS Code, open Extensions and choose **… → Install from VSIX…**.
-2. Select `epic-media-writer-highlighter-0.2.3.vsix`.
+2. Select `epic-media-writer-highlighter-0.6.1.vsix`.
 3. Run **Preferences: Color Theme** and choose **Blackberries**.
 4. Open a `.epic` or `.epicx` file. For another extension, select **EPIC Media** from the language selector.
 
@@ -101,3 +101,9 @@ Hover over **Author**, **Artist**, or **Creator** inside the fenced header. A ca
 The header must have opening and closing `---` lines. Roles already present elsewhere in the header are omitted to avoid duplicates. Body text and Generation settings are excluded. If the document changes after the card is shown, hover again to refresh its links. Changes are undoable.
 
 The right-click **EPIC: Change Header Role…** command and **Cmd+. / Ctrl+.** Quick Fix remain available as alternatives. Authorship memory learns from any of the three roles.
+
+## New untitled files
+
+On first activation after installation, a one-time prompt offers **Use EPIC** or **Keep Current Default**. Accepting sets the user setting `files.defaultLanguage` to `epic`, so new untitled text files have highlighting and Tab snippets before saving. Existing documents are unchanged. Workspace settings can override the user default.
+
+Declining or dismissing the prompt keeps the current setting. The prompt does not repeat on restart or future extension updates. Existing installations receive it once when first updating to this feature. To change the choice later, edit **Files: Default Language** in VS Code Settings (`epic` for EPIC, `plaintext` for plain text).

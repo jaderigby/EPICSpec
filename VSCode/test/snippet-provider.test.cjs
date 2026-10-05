@@ -17,10 +17,10 @@ test('save events feed memory, completion and Tab expansion; reset restores fall
     languages: { registerCompletionItemProvider: (language, p) => { assert.equal(language, 'epic'); provider = p; return disposable; } },
     workspace: {
       onDidSaveTextDocument: cb => { handlers.save = cb; return disposable; },
-      onDidChangeTextDocument: () => disposable
+      onDidChangeTextDocument: cb => { handlers.change = cb; return disposable; }
     },
     window: {
-      onDidChangeTextEditorSelection: () => disposable,
+      onDidChangeTextEditorSelection: cb => { handlers.selection = cb; return disposable; },
       onDidChangeActiveTextEditor: () => disposable,
       showInformationMessage: () => {}, showWarningMessage: error => { throw Error(error); }
     }
@@ -32,7 +32,7 @@ test('save events feed memory, completion and Tab expansion; reset restores fall
   function save(file, extra = {}) {
     handlers.save({ languageId: 'epic', isUntitled: false, uri: { scheme: 'file', toString: () => file }, getText: () => '---\nArtist: Jade\n---', ...extra });
   }
-  const doc = { languageId: 'epic', lineAt: () => ({ text: 'hd' }) };
+  const doc = { languageId: 'epic', lineCount: 1, lineAt: line => { if (line !== 0) throw Error('Illegal value for line'); return { text: 'hd' }; } };
   const position = { line: 0, character: 2 };
   function header() { return provider.provideCompletionItems(doc, position).find(item => item.label === 'hd').insertText.value; }
   assert.match(header(), /\$\{2:Me\}/);
@@ -44,6 +44,20 @@ test('save events feed memory, completion and Tab expansion; reset restores fall
   assert.match(header(), /\$\{2:Jade\}/);
   const selection = { isEmpty: true, active: position };
   vscode.window.activeTextEditor = { document: doc, selection, selections: [selection], insertSnippet: async snippet => { inserted = snippet.value; return true; } };
+  await commands.get('epic.expandSnippet')();
+  assert.match(inserted, /\$\{2:Jade\}/);
+  // A deletion updates the document before VS Code moves the old cursor.
+  position.line = 8;
+  assert.doesNotThrow(() => handlers.change({document: doc}));
+  assert.equal(provider.provideCompletionItems(doc, position).length, 0);
+  position.line = 0; position.character = 20;
+  assert.doesNotThrow(() => handlers.change({document: doc}));
+  assert.equal(provider.provideCompletionItems(doc, position).length, 0);
+  doc.isClosed = true;
+  assert.doesNotThrow(() => handlers.change({document: doc}));
+  doc.isClosed = false; position.character = 2;
+  handlers.selection();
+  inserted = undefined;
   await commands.get('epic.expandSnippet')();
   assert.match(inserted, /\$\{2:Jade\}/);
   await commands.get('epic.resetArtistMemory')();
