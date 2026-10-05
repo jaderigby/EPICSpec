@@ -50,6 +50,10 @@ function registerHeaderRoles(context) {
       const field = fields.find(item => item.line === args.line && item.start === args.start && item.role === args.from);
       if (!field || !alternatives(fields, field).includes(role)) return;
       const applied = await editor.edit(builder => builder.replace(range(field), role));
+      if (applied) {
+        hoverTargets.delete(id);
+        await vscode.commands.executeCommand('editor.action.hideHover');
+      }
       if (!applied) vscode.window.showWarningMessage('EPIC: could not change the header. Hover over the field and try again.');
     }),
     vscode.languages.registerHoverProvider('epic', {

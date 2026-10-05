@@ -2,7 +2,7 @@
   "name": "epic-media-writer-highlighter",
   "displayName": "EPIC Media Writer\u2122 Highlighter",
   "description": "EPIC and EPICX syntax highlighting with the EPIC Media Writer Blackberries color theme.",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "publisher": "epic-media-writer",
   "author": "Jade C. Rigby",
   "engines": {
