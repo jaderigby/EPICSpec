@@ -30,7 +30,7 @@ test('popup changes only key; quick fixes match, cancellation and stale editors 
     CodeActionKind: { QuickFix: 'quickfix' },
     WorkspaceEdit: class { replace(uri, range, text) { this.replacement = {uri, range, text}; } },
     commands: { executeCommand: async (name) => commands.get(name)?.(), registerCommand: (name, cb) => {commands.set(name, cb); return {};} },
-    languages: { registerCodeActionsProvider: (_, p) => { provider = p; return {}; } },
+    languages: { registerHoverProvider: () => ({}), registerCodeActionsProvider: (_, p) => { provider = p; return {}; } },
     workspace: { onDidChangeTextDocument: () => ({}) },
     window: { activeTextEditor: editor, onDidChangeTextEditorSelection: cb => { selectionChanged = cb; return {}; }, onDidChangeActiveTextEditor: () => ({}), showInformationMessage: () => {}, showQuickPick: async choices => { assert.deepEqual(Array.from(choices), ['Author', 'Creator']); duringPick?.(); return choice; } }
   };
@@ -40,21 +40,21 @@ test('popup changes only key; quick fixes match, cancellation and stale editors 
   await commands.get('epic.changeHeaderRole')();
   assert.equal(edits.length, 1); assert.equal(edits[0].text, 'Author');
   assert.deepEqual(Array.from(edits[0].range.args), [1,2,1,8]);
-  // A direct mouse click/selection on the label invokes the popup.
+  // Clicking or selecting the label no longer invokes a popup.
   await selectionChanged({ kind: 2, textEditor: editor });
-  assert.equal(edits.length, 2);
+  assert.equal(edits.length, 1);
   await selectionChanged({ kind: 1, textEditor: editor });
   await selectionChanged({ kind: 3, textEditor: editor });
-  assert.equal(edits.length, 2);
+  assert.equal(edits.length, 1);
   const selectedKey = editor.selection;
   editor.selection = { start: {line:1,character:11}, end: {line:1,character:11} };
   await selectionChanged({kind:2,textEditor:editor});
-  assert.equal(edits.length, 2);
+  assert.equal(edits.length, 1);
   editor.selection = selectedKey;
   const actions = provider.provideCodeActions(document, selection);
   assert.equal(actions.length, 2); assert.equal(actions[1].edit.replacement.text, 'Creator');
   assert.equal(provider.provideCodeActions(document, {start:{line:1,character:10},end:{line:1,character:14}}).length, 0);
-  choice = undefined; await commands.get('epic.changeHeaderRole')(); assert.equal(edits.length, 2);
+  choice = undefined; await commands.get('epic.changeHeaderRole')(); assert.equal(edits.length, 1);
   choice = 'Creator'; duringPick = () => document.version++;
-  await commands.get('epic.changeHeaderRole')(); assert.equal(edits.length, 2);
+  await commands.get('epic.changeHeaderRole')(); assert.equal(edits.length, 1);
 });

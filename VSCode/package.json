@@ -1,8 +1,8 @@
 {
   "name": "epic-media-writer-highlighter",
-  "displayName": "EPIC Media Writer™ Highlighter",
+  "displayName": "EPIC Media Writer\u2122 Highlighter",
   "description": "EPIC and EPICX syntax highlighting with the EPIC Media Writer Blackberries color theme.",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "publisher": "epic-media-writer",
   "author": "Jade C. Rigby",
   "engines": {
@@ -55,8 +55,8 @@
       "[epic]": {
         "editor.bracketPairColorization.enabled": false,
         "editor.unicodeHighlight.allowedCharacters": {
-          "’": true,
-          "‘": true
+          "\u2019": true,
+          "\u2018": true
         },
         "editor.tabCompletion": "onlySnippets"
       }
@@ -83,7 +83,7 @@
       },
       {
         "command": "epic.changeHeaderRole",
-        "title": "EPIC: Change Header Role…",
+        "title": "EPIC: Change Header Role\u2026",
         "enablement": "editorLangId == epic && epic.headerRoleSelected && !editorReadonly"
       }
     ],

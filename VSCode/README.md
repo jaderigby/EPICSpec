@@ -96,6 +96,8 @@ Templates remain in `snippets/epic.json`. Keep the authorship value as a numbere
 
 ## Change header authorship role
 
-Click **Artist**, **Author**, or **Creator** inside the fenced header to open a picker of the other roles. No right-click or modifier key is required. Keyboard navigation does not open the picker. The right-click command **EPIC: Change Header Role…** remains available as an alternative. You can also press **Cmd+.** on macOS (**Ctrl+.** on Windows/Linux) for direct Quick Fix choices, or run the command from the Command Palette.
+Hover over **Author**, **Artist**, or **Creator** inside the fenced header. A card beside the field shows **Change to: Artist · Creator** (or the other available roles). Click a role to replace the key while preserving its value and spacing. Normal clicks and keyboard navigation no longer open a picker at the top of the window.
 
-Only the field name changes; its value and spacing remain intact. Roles already present elsewhere in the header are omitted to avoid duplicate fields. Body text and Generation settings are excluded. Escape cancels the popup, and a change can be undone normally. Authorship memory learns from any of the three roles.
+The header must have opening and closing `---` lines. Roles already present elsewhere in the header are omitted to avoid duplicates. Body text and Generation settings are excluded. If the document changes after the card is shown, hover again to refresh its links. Changes are undoable.
+
+The right-click **EPIC: Change Header Role…** command and **Cmd+. / Ctrl+.** Quick Fix remain available as alternatives. Authorship memory learns from any of the three roles.
