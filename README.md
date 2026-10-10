@@ -17,6 +17,8 @@ It brings together information that traditionally lives in separate documents an
 
 EPIC provides a common language for carrying creative intent from authoring through performance and rendering.
 
+To experience a full integration, check out [EPIC Studio™](https://jaderigby.gumroad.com/l/epic-studio) and [EPIC Media Writer™](https://jaderigby.gumroad.com/l/epic-media-writer)
+
 -----
 
 ## ⭐ Why EPIC?
