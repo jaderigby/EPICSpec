@@ -2,7 +2,8 @@
   "Freeflow section": {
     "prefix": "ff",
     "body": [
-      "[{&}$0]"
+      "[{&}${1}]",
+      "$0"
     ],
     "description": "Insert an EPIC freeflow section"
   },

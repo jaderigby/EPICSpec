@@ -33,3 +33,17 @@ Styles:
 
 UseStyle: 2
 ```
+
+In `.epic`, labeled freeflows are `EpicFreeflow` nodes interleaved with ordinary
+nodes in `body.preamble` or a section's `lines`, preserving their source position.
+They do not create or change sections. Their `text` is opaque freeform content:
+section labels, instruction blocks, and other syntax inside it are not parsed.
+Whitespace is preserved, with line endings normalized to LF as elsewhere in the
+parser. Standalone opener and terminator lines allow surrounding whitespace. The first
+standalone `:::` closes a labeled freeflow; content whitespace remains intact.
+
+Trailing unlabeled Freeflow Notes are stored in `body.notes` as an
+`EpicFreeflowNotes` node and consume everything through EOF. They require a
+preceding empty line. Missing labeled terminators, empty freeflows, and malformed
+openers produce parse errors. Stringification preserves freeflow contents and
+placement; it does not silently add a missing terminator.

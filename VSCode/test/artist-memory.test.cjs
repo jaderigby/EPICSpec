@@ -44,7 +44,7 @@ test('artist values cannot inject snippet variables or tab stops', () => {
 });
 test('other snippets and customized header fallbacks remain intact', () => {
   const ff = require('../snippets/epic.json')['Freeflow section'];
-  assert.equal(snippetBody(ff, 'Jade'), '[{&}$0]');
+  assert.equal(snippetBody(ff, 'Jade'), '[{&}${1}]\n$0');
   assert.equal(snippetBody({ body: 'Artist: ${4:Someone}' }, null), 'Artist: ${4:Someone}');
   assert.equal(snippetBody({ body: 'Artist: ${4:Someone}' }, 'Jade'), 'Artist: ${4:Jade}');
 });

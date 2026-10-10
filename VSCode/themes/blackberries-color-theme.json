@@ -50,7 +50,11 @@
     "button.background": "#345CBA",
     "button.foreground": "#FFFFFF",
     "button.hoverBackground": "#3675CF",
-    "list.activeSelectionBackground": "#314A62",
+    "list.activeSelectionBackground": "#1f4873",
+    "list.inactiveSelectionBackground": "#1f4873",
+    "list.focusBackground": "#1f4873",
+    "list.focusAndSelectionBackground": "#1f4873",
+    "quickInputList.focusBackground": "#1f4873",
     "list.activeSelectionForeground": "#FFFFFF",
     "list.hoverBackground": "#21354A",
     "list.highlightForeground": "#90D6FE",
@@ -112,7 +116,9 @@
         "punctuation.definition.custom-property.scss",
         "punctuation.definition.custom-property.less"
       ],
-      "settings": { "foreground": "#efcdfe" }
+      "settings": {
+        "foreground": "#efcdfe"
+      }
     },
     {
       "name": "Strings",
@@ -224,7 +230,9 @@
         "variable.other.property.jsx",
         "variable.other.property.tsx"
       ],
-      "settings": { "foreground": "#90D6FE" }
+      "settings": {
+        "foreground": "#90D6FE"
+      }
     },
     {
       "name": "JS/TS property access",
@@ -285,7 +293,9 @@
         "support.type.property-name.json",
         "support.type.property-name.json.comments"
       ],
-      "settings": { "foreground": "#90D6FE" }
+      "settings": {
+        "foreground": "#90D6FE"
+      }
     },
     {
       "name": "JSON strings",
@@ -293,7 +303,9 @@
         "string.quoted.double.json",
         "string.quoted.double.json.comments"
       ],
-      "settings": { "foreground": "#B9E6B0" }
+      "settings": {
+        "foreground": "#B9E6B0"
+      }
     },
     {
       "name": "JSON strings",
@@ -530,7 +542,8 @@
         "markup.quote.freeflow.epic"
       ],
       "settings": {
-        "foreground": "#E7C1F8"
+        "foreground": "#E7C1F8",
+        "fontStyle": ""
       }
     },
     {
@@ -539,7 +552,8 @@
         "markup.heading.freeflow.epic"
       ],
       "settings": {
-        "foreground": "#C490DD"
+        "foreground": "#C490DD",
+        "fontStyle": ""
       }
     },
     {
@@ -587,7 +601,8 @@
         "string.other.link.image.epic"
       ],
       "settings": {
-        "foreground": "#CDACDE"
+        "foreground": "#CDACDE",
+        "fontStyle": ""
       }
     },
     {
@@ -636,6 +651,114 @@
       ],
       "settings": {
         "foreground": "#B9E6B0",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC reference punctuation.definition.link.epic",
+      "scope": "punctuation.definition.link.epic",
+      "settings": {
+        "foreground": "#526661",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC reference punctuation.definition.image.epic",
+      "scope": "punctuation.definition.image.epic",
+      "settings": {
+        "foreground": "#5D4E64",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC reference markup.underline.link.target.epic",
+      "scope": "markup.underline.link.target.epic",
+      "settings": {
+        "foreground": "#698D84",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC reference string.other.link.image.target.epic",
+      "scope": "string.other.link.image.target.epic",
+      "settings": {
+        "foreground": "#877292",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC reference markup.quote.freeflow.epic punctuation.definition.link.epic",
+      "scope": "markup.quote.freeflow.epic punctuation.definition.link.epic",
+      "settings": {
+        "foreground": "#5F7071",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC reference markup.quote.freeflow.epic punctuation.definition.image.epic",
+      "scope": "markup.quote.freeflow.epic punctuation.definition.image.epic",
+      "settings": {
+        "foreground": "#6A5875",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC reference markup.quote.freeflow.epic markup.underline.link.target.epic",
+      "scope": "markup.quote.freeflow.epic markup.underline.link.target.epic",
+      "settings": {
+        "foreground": "#72938E",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC reference markup.quote.freeflow.epic string.other.link.image.target.epic",
+      "scope": "markup.quote.freeflow.epic string.other.link.image.target.epic",
+      "settings": {
+        "foreground": "#8F789C",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC faded emphasis markers",
+      "scope": [
+        "punctuation.definition.bold.epic",
+        "punctuation.definition.italic.epic"
+      ],
+      "settings": {
+        "foreground": "#6E6E6E",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC faded emphasis markers",
+      "scope": [
+        "markup.quote.freeflow.epic punctuation.definition.bold.epic",
+        "markup.quote.freeflow.epic punctuation.definition.italic.epic"
+      ],
+      "settings": {
+        "foreground": "#766180",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC faded emphasis markers",
+      "scope": [
+        "markup.list.epic punctuation.definition.bold.epic",
+        "markup.list.epic punctuation.definition.italic.epic"
+      ],
+      "settings": {
+        "foreground": "#6E6254",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "EPIC faded emphasis markers",
+      "scope": [
+        "markup.quote.freeflow.epic markup.list.epic punctuation.definition.bold.epic",
+        "markup.quote.freeflow.epic markup.list.epic punctuation.definition.italic.epic"
+      ],
+      "settings": {
+        "foreground": "#7B6C64",
         "fontStyle": ""
       }
     }

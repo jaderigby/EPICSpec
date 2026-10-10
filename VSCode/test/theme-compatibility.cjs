@@ -61,7 +61,50 @@ async function main() {
     line('Freeflow prose', 'markup.quote.freeflow.epic');
     line(':::');
     assert.deepEqual(line('Ordinary lyrics').scoped.tokens[0].scopes, ['text.epic']);
-    line('![Cover](cover.png)', 'string.other.link.image.epic');
+    for (const item of ['- Whole item', '* Whole item', '+ Whole item', '  1. Whole item']) {
+      const result = line(item, 'markup.list.epic');
+      const last = result.scoped.tokens.find(t => t.startIndex <= item.length - 1 && t.endIndex > item.length - 1);
+      assert(last.scopes.includes('markup.list.epic'), `${name}: list text missing scope`);
+      if (name === 'Blackberries') assert.equal(result.colorAt(item.length - 1), '#F3D9B8');
+      assert.deepEqual(line('Ordinary lyrics').scoped.tokens[0].scopes, ['text.epic']);
+    }
+    line('- **Bold** item', 'markup.bold.epic');
+    line('- {{soft}} item', 'keyword.control.instruction.epic');
+    function blend(hex, opacity, bg) {
+      return '#' + [1,3,5].map(i => Math.round(parseInt(hex.slice(i,i+2),16)*opacity + parseInt(bg.slice(i,i+2),16)*(1-opacity)).toString(16).padStart(2,'0')).join('').toUpperCase();
+    }
+    function checkReferences(bg) {
+      for (const [text, label, target, marker, base, dest] of [
+        ['[link](something)', 1, 7, 0, '#B3E2D6', '#9FD6C8'],
+        ['![alt](image.png)', 2, 7, 0, '#CDACDE', '#CDACDE'],
+        ['![](image.png)', null, 4, 0, '#CDACDE', '#CDACDE']
+      ]) {
+        const result = line(text);
+        if (name === 'Blackberries') {
+          if (label !== null) assert.equal(result.colorAt(label), base);
+          assert.equal(result.colorAt(target), blend(dest, .65, bg));
+          for (const i of [marker,text.indexOf(']'),text.indexOf('('),text.length-1]) {
+            assert.equal(result.colorAt(i), blend(base, .44, bg), `${text}: punctuation at ${i}`);
+          }
+        }
+      }
+    }
+    for (const text of ['**bold**', '*italic*']) {
+      const result = line(text);
+      if (name === 'Blackberries') {
+        assert.equal(result.colorAt(0), blend('#F4F4F4', .44, '#050505'));
+        assert.equal(result.colorAt(text.length-1), result.colorAt(0));
+        assert.equal(result.colorAt(3), '#F4F4F4');
+      }
+    }
+    checkReferences('#050505');
+    const openerText = '[{&}Freeflow title]';
+    const openerTokens = grammar.tokenizeLine2(openerText, state).tokens;
+    line(openerText, 'markup.heading.freeflow.epic');
+    if (name === 'Blackberries') for (let i=1;i<openerTokens.length;i+=2) assert.equal((openerTokens[i] >>> 11) & 15, 0, 'freeflow opener must have no bold or italic');
+    checkReferences('#1D1622');
+    line(':::');
+    assert.deepEqual(line('Ordinary lyrics').scoped.tokens[0].scopes, ['text.epic']);
     console.log(`${name}: grammar boundaries, fallback scopes, bracket colors and timestamps passed`);
     registry.dispose();
   }

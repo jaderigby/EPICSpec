@@ -2,7 +2,7 @@
   "name": "epic-media-writer-highlighter",
   "displayName": "EPIC Media Writer\u2122 Highlighter",
   "description": "EPIC and EPICX syntax highlighting with the EPIC Media Writer Blackberries color theme.",
-  "version": "0.6.1",
+  "version": "0.6.6",
   "publisher": "epic-media-writer",
   "author": "Jade C. Rigby",
   "engines": {
@@ -92,6 +92,11 @@
         "command": "epic.expandSnippet",
         "key": "tab",
         "when": "editorTextFocus && editorLangId == epic && !editorReadonly && !editorTabMovesFocus && !inSnippetMode && !suggestWidgetVisible && epic.snippetPrefix"
+      },
+      {
+        "key": "enter",
+        "command": "jumpToNextSnippetPlaceholder",
+        "when": "editorTextFocus && editorLangId == epic && !editorReadonly && inSnippetMode && hasNextTabstop && epic.freeflowLabel && !suggestWidgetVisible && !isComposing"
       }
     ],
     "menus": {

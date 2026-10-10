@@ -116,23 +116,73 @@
         },
         {
           "name": "markup.bold.epic",
-          "match": "\\*\\*[^*\\n]+\\*\\*"
+          "match": "(\\*\\*)([^*\\n]+)(\\*\\*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.bold.epic"
+            },
+            "3": {
+              "name": "punctuation.definition.bold.epic"
+            }
+          }
         },
         {
           "name": "markup.italic.epic",
-          "match": "(?<!\\*)\\*[^*\\n]+\\*(?!\\*)"
+          "match": "(?<!\\*)(\\*)([^*\\n]+)(\\*)(?!\\*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.italic.epic"
+            },
+            "3": {
+              "name": "punctuation.definition.italic.epic"
+            }
+          }
         },
         {
           "name": "string.other.link.image.epic",
-          "match": "!\\[[^\\]\\n]*\\]\\([^\\)\\n]+\\)"
+          "match": "(!\\[)([^\\]\\n]*)(\\]\\()([^\\)\\n]+)(\\))",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.image.epic"
+            },
+            "3": {
+              "name": "punctuation.definition.image.epic"
+            },
+            "5": {
+              "name": "punctuation.definition.image.epic"
+            },
+            "4": {
+              "name": "string.other.link.image.target.epic"
+            }
+          }
         },
         {
           "name": "markup.underline.link.epic",
-          "match": "\\[[^\\]\\n]*\\]\\([^\\)\\n]+\\)"
+          "match": "(\\[)([^\\]\\n]*)(\\]\\()([^\\)\\n]+)(\\))",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.link.epic"
+            },
+            "3": {
+              "name": "punctuation.definition.link.epic"
+            },
+            "5": {
+              "name": "punctuation.definition.link.epic"
+            },
+            "4": {
+              "name": "markup.underline.link.target.epic"
+            }
+          }
         },
         {
           "name": "markup.list.epic",
-          "match": "^\\s*(?:[-*+]|\\d+\\.)\\s+"
+          "begin": "^\\s*(?:[-*+]|\\d+\\.)\\s+",
+          "end": "$",
+          "patterns": [
+            {
+              "include": "#inline"
+            }
+          ]
         }
       ]
     }

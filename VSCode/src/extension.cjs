@@ -1,5 +1,7 @@
 'use strict';
 const vscode = require('vscode');
+const { registerFreeflowLabel } = require('./freeflow-label.cjs');
+const { registerFreeflowBackgrounds } = require('./freeflow-backgrounds.cjs');
 const { offerDefaultLanguage } = require('./first-run.cjs');
 const { registerHeaderRoles } = require('./header-role-ui.cjs');
 const { registerSnippets } = require('./snippets.cjs');
@@ -10,6 +12,8 @@ function isEpicx(document) {
 function activate(context) {
   void offerDefaultLanguage(context).catch(error => console.error('EPIC first-run setup failed:', error));
   registerSnippets(context);
+  registerFreeflowLabel(context);
+  registerFreeflowBackgrounds(context);
   registerHeaderRoles(context);
   const snapshots = new Map();
   const applying = new Set();

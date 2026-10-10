@@ -5,7 +5,7 @@ A VS Code extension with EPIC / EPICX syntax highlighting and an optional **Blac
 ## Install
 
 1. In VS Code, open Extensions and choose **… → Install from VSIX…**.
-2. Select `epic-media-writer-highlighter-0.6.1.vsix`.
+2. Select `epic-media-writer-highlighter-0.6.6.vsix`.
 3. Run **Preferences: Color Theme** and choose **Blackberries**.
 4. Open a `.epic` or `.epicx` file. For another extension, select **EPIC Media** from the language selector.
 
@@ -21,7 +21,7 @@ The language grammar also works with other themes. Exact Media Writer colors req
 - Freeflow sections and freeform notes: lavender
 - Markdown bold, italic, links, images, lists and inline code
 
-VS Code token themes do not reproduce Media Writer’s inline background blocks. Freeform notes use lavender text instead. Standalone integer lines are treated as entry numbers; the grammar does not validate EPIC structure or metadata.
+Blackberries uses editor decorations for full-width freeflow background blocks. Freeform notes use lavender text instead. Standalone integer lines are treated as entry numbers; the grammar does not validate EPIC structure or metadata.
 
 ## Development
 
@@ -107,3 +107,5 @@ The right-click **EPIC: Change Header Role…** command and **Cmd+. / Ctrl+.** Q
 On first activation after installation, a one-time prompt offers **Use EPIC** or **Keep Current Default**. Accepting sets the user setting `files.defaultLanguage` to `epic`, so new untitled text files have highlighting and Tab snippets before saving. Existing documents are unchanged. Workspace settings can override the user default.
 
 Declining or dismissing the prompt keeps the current setting. The prompt does not repeat on restart or future extension updates. Existing installations receive it once when first updating to this feature. To change the choice later, edit **Files: Default Language** in VS Code Settings (`epic` for EPIC, `plaintext` for plain text).
+
+The `ff` snippet starts with the cursor inside `[{&}]` for an optional label. Press Tab or Enter from that label to move to the next line and write the freeflow content.

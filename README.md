@@ -1,451 +1,425 @@
-# 🚀 EPIC --- A Universal Language for Creative Direction
+# 🚀 EPIC — Extended Performance & Intelligent Cues
 
-![Version](https://img.shields.io/badge/version-1.0-blue)
-![Spec](https://img.shields.io/badge/spec-open-lightgrey)
-![Format](https://img.shields.io/badge/format-plain--text-green)
-![Status](https://img.shields.io/badge/status-active-success)
-![License](https://img.shields.io/badge/license-Apache%202.0-blue)
+### A Universal Language for Creative Direction
 
-> **Write once. Render anywhere.**
+**Write once. Render anywhere.**
 
-**EPIC (Extended Performance & Intelligent Cues)** is a lightweight,
-human-readable language for expressing **creative intent, structure, and
-timing** across mediums.
+EPIC is an open, human-readable, plain-text language for authoring lyrics, defining song structure, directing performances, and synchronizing creative content to time.
 
-------------------------------------------------------------------------
+It brings together information that traditionally lives in separate files and applications:
 
-## ⭐ Why EPIC
+- Lyrics and composition
+- Song structure and phrasing
+- Authorship and production metadata
+- AI generation instructions
+- Vocal and instrumental performance direction
+- Precise lyric and word timing
+- Synchronized events and production cues
 
-Creative workflows are fragmented.
+**One language. From the first written lyric to the final timed performance.**
 
--   Lyrics in one tool
--   Timing in another
--   AI prompts somewhere else
--   Rendering somewhere else
-
-EPIC unifies all of it into a **single source of truth**:
-
-> Structure + Meaning + Timing
-
-------------------------------------------------------------------------
-
-## 🔥 What Makes EPIC Different
-
-Most formats describe *what something is*.
-
-EPIC describes:
-
-> **what it should feel like, how it should behave, and when it should
-> happen**
-
-------------------------------------------------------------------------
-
-## 🧩 Core Concepts
-
-### 1. Two Formats
-
-  Format     Purpose
-  ---------- ----------------------------------
-  `.epic`    Authoring (structure + intent)
-  `.epicx`   Execution (timing + performance)
-
-------------------------------------------------------------------------
-
-### 2. Instruction Blocks
-
-    {{ instruction }}
-
-The core primitive of EPIC.
-
--   Human-readable
--   Machine-parseable
--   Context-aware
-
-Examples:
-
-    {{whispered}}
-    {{camera: slow zoom}}
-    {{social: like-subscribe}}
-
-------------------------------------------------------------------------
-
-### 3. Micro-Events
-
-Precise, scoped timing events:
-
-    @00:51.000 {{lights dim}}
-    @00:52.000 {{cello swells}}
-
-------------------------------------------------------------------------
-
-### 4. Structured Authorship
-
-Required and deterministic:
-
-    Title: ...
-    Artist: ...
-
-Supports attribution, licensing, and collaboration.
-
-------------------------------------------------------------------------
-
-## 🎭 Emotives Module
-
-EPIC includes a canonical **Emotives module** --- a universal vocabulary
-for expressing **perceptual intent**.
-
-Emotives do not prescribe *how* something is implemented.
-
-They describe:
-
-> **how something should feel**
-
-This allows the same EPIC file to drive: - typography - animation -
-lighting - particle systems - AI generation
-
-------------------------------------------------------------------------
-
-## 🧠 The Model
-
-Emotives are organized as **independent axes**.
-
-Each axis represents a dimension of perception.
-
-You can combine them freely.
-
-------------------------------------------------------------------------
-
-## 🔁 Core Axes
-
-### Energy
-
--   energetic ↔ calm
-
-Controls activity level and intensity.
-
-------------------------------------------------------------------------
-
-### Movement (Direction)
-
--   rise ↔ fall
--   converge ↔ drift
-
-Describes directional motion and flow.
-
-------------------------------------------------------------------------
-
-### Dynamics (Intensity Envelope)
-
--   swell ↔ decay
-
-Controls buildup vs release.
-
-------------------------------------------------------------------------
-
-### Atmosphere
-
--   dark ↔ light
-
-Defines tonal weight and mood.
-
-------------------------------------------------------------------------
-
-### Visibility
-
--   reveal ↔ fade
-
-Controls perceptual emergence and disappearance.
-
-------------------------------------------------------------------------
-
-### Distortion
-
--   warp ↔ blur
-
-Alters clarity, structure, or meaning.
-
-------------------------------------------------------------------------
-
-### Motion Quality
-
--   smooth ↔ turbulent
-
-Defines regular vs chaotic motion.
-
-------------------------------------------------------------------------
-
-### Timing Feel
-
--   tight ↔ loose
-
-Controls alignment to rhythm or timing.
-
-------------------------------------------------------------------------
-
-## 🎯 Modifiers (Semantic Focus)
-
-These do NOT describe motion.
-
-They describe **importance**:
-
--   strong → primary anchor
--   emphasis → increased prominence
--   diminish → reduced prominence
-
-------------------------------------------------------------------------
-
-## 🧩 Example Combinations
-
-``` epic
-{{energetic, swell, reveal}}
-{{calm, drift, fade}}
-{{dark, warp, turbulent}}
-{{strong, emphasis}}
-```
-
-These combinations form a **multi-dimensional intent vector**.
-
-------------------------------------------------------------------------
-
-## ⚙️ Why This Matters
-
-Instead of saying:
-
--   "make the text bigger"
--   "add glow"
--   "increase motion"
-
-You say:
-
-``` epic
-{{strong, energetic, swell}}
-```
-
-And the system interprets it.
-
-------------------------------------------------------------------------
-
-## 🔄 Key Idea
-
-> Emotives separate **intent** from **implementation**
-
-This enables:
-
--   cross-platform consistency
--   renderer flexibility
--   AI alignment
--   future-proof design
-
-------------------------------------------------------------------------
-
-## 🚀 In Practice
-
-Creators: - describe feeling and evolution
-
-Developers: - map emotives → visuals / behavior
-
-------------------------------------------------------------------------
-
-## 🧠 One Line
-
-> Emotives are the **emotional coordinate system of EPIC**
-
-
-------------------------------------------------------------------------
-
-## 🚀 Quick Example
-
-``` epic
 ---
-Title: Elem-en Ellow Vo
-Artist: Kozzality
-BPM: 128
-Tags: techno, hypnotic
+
+## ⭐ Why EPIC?
+
+A song is more than its lyrics.
+
+It has sections, phrasing, delivery, timing, production decisions, and creative intentions. Yet most workflows scatter that information across lyric sheets, prompts, subtitle files, production notes, and application-specific formats.
+
+EPIC provides a structured way to express these relationships in a single, portable language.
+
+The goal isn't to replace creative tools. It's to give them a common language.
+
+**Author → Generate → Perform → Synchronize → Render**
+
+EPIC can travel through that entire process.
+
+## 🎵 Two Formats. One Language.
+
+EPIC defines two complementary document formats.
+
+| Format | Purpose |
+|---|---|
+| `.epic` | Creative authoring: lyrics, structure, phrasing, metadata, and performance intent |
+| `.epicx` | Timed execution: synchronized lyrics, performance instructions, and precise events |
+
+Both are plain text, human-readable, and designed for machine parsing.
+
+### 1. `.epic` — Authoring
+
+An EPIC document starts with a header identifying the work and its authorship, followed by the creative content.
+
+```text
+---
+Title: The Open Road
+Artist: Example Artist
 
 [Generation]
-Styles:
-1. Deep hypnotic minimal techno
-2. Dark warehouse techno
+Styles: Midtempo alternative rock,
+melodic bass, steady acoustic drums,
+restrained lead vocals
+---
 
-UseStyle: 1
+[Intro]
+{{instrumental}}
+
+[Verse]
+The morning sun is rising
+The highway stretches on
+Another day is waiting
+Another night is gone
+
+[Chorus]
+We're heading for tomorrow
+With miles of open sky
+```
+
+This is more than a lyric sheet.
+
+It contains structured authorship, generation direction, section boundaries, performance instructions, and intentional phrasing.
+
+In `.epic`, **line breaks are meaningful**. They express the phrasing and organization of the written performance.
+
+Sections are identified using familiar labels such as `[Verse]`, `[Chorus]`, `[Bridge]`, `[Intro]`, and `[Outro]`. Custom section names are also supported.
+
+The document remains readable and useful even without specialized software.
+
+### 2. `.epicx` — Timed Performance
+
+When the work needs synchronization, EPIC provides `.epicx`.
+
+```text
+---
+Title: The Open Road
+Artist: Example Artist
+---
+
+1
+00:05.000 --> 00:08.500
+[Verse]
+The morning sun is rising
+
+2
+00:08.500 --> 00:12.000
+[Verse]
+The highway stretches on
+
+3
+00:12.000 --> 00:15.500
+[Verse]
+Another day is waiting
+
+4
+00:15.500 --> 00:19.000
+[Verse]
+Another night is gone
+
+5
+00:22.000 --> 00:26.000
+[Chorus]
+We're heading for tomorrow
+```
+
+*All timestamps are illustrative.*
+
+Each timed entry contains a sequential identifier, a timestamp or optional time range, an optional section label, and the performance content with any associated instructions or events.
+
+Timestamps support millisecond precision:
+
+```text
+MM:SS.mmm
+HH:MM:SS.mmm
+```
+
+Optional ranges define explicit entry boundaries:
+
+```text
+00:22.000 --> 00:26.000
+```
+
+Unlike `.epic`, line breaks within an `.epicx` entry are for layout rather than phrasing.
+
+This distinction lets EPIC preserve the creative structure of a song while providing a separate, precise representation for synchronized performance.
+
+---
+
+## 🎤 Performance Direction
+
+EPIC doesn't just describe *what* is performed.
+
+It can describe **how it should be performed**.
+
+Instructions are enclosed in double curly braces:
+
+```text
+{{whispered}}
+{{guitar solo}}
+{{pronounced: /ter/}}
+```
+
+Instructions can be written in three contexts.
+
+**Sectional instructions** apply to a section:
+
+```text
+[Chorus {{choral chant}}]
+Sing together
+```
+
+**Inline instructions** accompany specific content:
+
+```text
+The road goes on {{male singer}}
+```
+
+**Standalone instructions** express performance or production cues:
+
+```text
+{{guitar solo}}
+```
+
+Instructions may be descriptive phrases, structured key/value expressions, or combinations of both.
+
+```text
+{{whispered, distant}}
+{{vocals: choir}}
+{{pronounced: /ter/, emotion: sorrowful}}
+```
+
+The instruction system is intentionally extensible.
+
+EPIC defines how instructions are expressed and parsed without requiring every renderer or creative application to interpret them identically.
+
+A vocal synthesis engine, a lyric visualizer, and a live-performance system can each interpret the instructions relevant to their capabilities.
+
+## ⏱️ Precision Timing and Micro-Events
+
+EPICX supports more than line-level synchronization.
+
+Micro-events allow precise actions within an individual timed entry.
+
+```text
+3
+00:49.500 --> 00:55.500
+[Bridge]
+{{vocals: choir}}
+We sing together
+@00:51.000 {{lights dim}}
+@00:52.000 {{drums enter}}
+@00:53.000 {{lights brighten}}
+```
+
+Micro-events can trigger production actions, direct visual behavior, or associate timing with individual words.
+
+### Word-Level Timing
+
+```text
+4
+00:49.500 --> 00:51.500
+We sing together
+@00:49.500 We
+@00:49.800 sing
+@00:50.200 together
+```
+
+This enables word-synchronized lyric presentation, karaoke-style displays, typography effects, and other time-sensitive rendering.
+
+EPICX also provides the reserved `{{br}}` instruction for explicitly controlling line breaks during word-timed rendering.
+
+Micro-events are scoped to their containing entry and can use explicit timestamps or inherit the entry's starting time.
+
+**Timing is part of the language, not an afterthought.**
+
+---
+
+## 🧩 Metadata and Generation
+
+EPIC includes structured metadata for identifying a work, recording authorship, and describing its production context.
+
+Every document requires `Title` and at least one authorship field: `Creator`, `Artist`, or `Author`.
+
+Optional fields include BPM, musical key, time signature, language, tags, production notes, document version, and specification version.
+
+An optional `[Generation]` subsection can contain AI generation direction:
+
+```text
+---
+Title: Example Song
+Artist: Example Artist
+BPM: 120
+Key: Am
+Version: 1.0
+
+[Generation]
+Styles: Midtempo electronic pop,
+warm synthesizers, melodic bass,
+restrained vocals, steady drums
+Persona: Example Vocalist
 Energy: 0.75
 ---
+```
 
-[Verse {{calm, drift}}]
-Standing in the pulse of a neon light
+The generation subsection can also define multiple numbered styles and select one with `UseStyle`.
 
-{{lights dim}}
+EPIC provides a portable structure for creative instructions without tying the document to any particular AI provider or generation system.
+
+## 🎭 Expressive Direction and Emotives
+
+EPIC supports expressive and perceptual direction through its general instruction system.
+
+The optional **Emotives vocabulary** provides a consistent way to describe qualities such as energy, movement, atmosphere, intensity, and visual behavior.
+
+For example:
+
+```text
+[Intro {{calm, dark}}]
 
 [Chorus {{energetic, swell, reveal}}]
-Right here — right now
 ```
 
-------------------------------------------------------------------------
+These instructions describe creative intent rather than prescribing a particular implementation.
 
-## 🧠 Where EPIC Fits
+A renderer might interpret them through typography, lighting, animation, or other available capabilities.
 
-EPIC is domain-agnostic:
+Emotives are one application of EPIC's instruction system. They are not required for lyric authoring, performance direction, or timing.
 
--   🎵 Music & lyrics
--   🎬 Video & animation
--   🤖 AI generation
--   🎭 Live performance
--   🧩 Creative pipelines
+---
 
-------------------------------------------------------------------------
+## 📝 Notes, References, and Creative Development
 
-## ⚙️ Parser Included
+EPIC also supports features for the authoring process itself.
 
-This repo includes a reference parser.
+**Freeflows** allow labeled blocks of notes, ideas, and other material that sits outside the main document flow.
 
-Use it to:
+```text
+[{&} Alternate chorus idea]
+Try a quieter vocal delivery here.
+Introduce the bass before the drums.
+:::
+```
 
--   validate EPIC files
--   enforce grammar
--   build tooling
--   integrate into pipelines
+A special unlabeled Freeflow Notes section can appear at the end of a document.
 
-------------------------------------------------------------------------
+**Refs** provide a lightweight system for connecting text to reference definitions elsewhere in the document.
 
-## 📦 Adoption Strategy
+These authoring features are specific to `.epic`, allowing writers to develop material without confusing creative notes with timed performance content.
 
-You don't need full implementation.
+## ⚙️ Designed for Developers
 
-Start by using EPIC as:
+EPIC is intended to be straightforward to implement.
 
--   metadata
--   prompt structure
--   timing format
--   creative direction layer
+- Plain-text files
+- Defined grammar and syntax
+- EBNF specification
+- Deterministic structural rules
+- Millisecond-precision timing
+- Extensible instruction blocks
+- Support for custom sections
+- Forward-compatible instruction parsing
 
-Adopt incrementally.
+Unknown instruction keys or phrases should be ignored by parsers that do not recognize them, allowing implementations to support different capabilities without invalidating the underlying document.
 
-------------------------------------------------------------------------
+The repository includes a reference parser for validating documents and supporting integration into creative software.
 
-## 🌱 Vision
+## 🌐 Where EPIC Fits
 
-EPIC is a foundation layer for:
+EPIC is designed to be useful across creative systems.
 
--   creative tooling
--   AI systems
--   rendering engines
--   cross-platform content pipelines
+| Application | EPIC capability |
+|---|---|
+| Songwriting | Lyrics, sections, phrasing, and creative notes |
+| AI music generation | Structured prompts and performance instructions |
+| Lyric visualizers | Synchronized lines, words, and visual cues |
+| Video production | Timeline events and creative direction |
+| Live performance | Timed production and performance cues |
+| Creative software | A common, parseable interchange format |
 
-------------------------------------------------------------------------
+An application doesn't need to implement every feature to benefit from EPIC.
 
-# ⚡ First 60 Seconds with EPIC
+A lyric editor may support `.epic` authoring. A visualizer may consume `.epicx` timing. A performance system may respond to selected instructions and micro-events.
 
-## 1. Create a file
+**Adoption can be incremental.**
 
-song.epic
+---
 
-## 2. Paste this
+## ⚡ Your First EPIC Document
 
-``` epic
+Create a plain-text file named `song.epic`:
+
+```text
 ---
 Title: My First EPIC Song
-Artist: You
+Artist: Example Artist
 ---
 
 [Verse]
 Hello world
+It's a brand new day
 
-[Chorus {{energetic, swell}}]
-This is EPIC
+[Chorus]
+Sing it together
+Let the music play
 ```
 
-## 3. You just used:
+That's a valid starting point for structured lyric authoring.
 
--   Structure
--   Authorship
--   Instruction blocks
+Add performance direction whenever you need it:
 
-## 4. Add a cue
-
-``` epic
-{{lights dim}}
+```text
+[Chorus {{choral chant}}]
+Sing it together
+Let the music play
 ```
 
-## 5. Add timing (optional)
+When you're ready to synchronize the performance, create a corresponding `song.epicx` document with timed entries.
 
-``` epicx
-1
-00:01.000
-[Verse]
-Hello world
-```
+You can begin with nothing more than a text editor.
 
-------------------------------------------------------------------------
+## 🛠️ Visual Studio Code Support
 
-# 🧭 Who EPIC Is For
+The repository includes VS Code language tooling for `.epic` and `.epicx` files.
 
-EPIC sits at the intersection of **creativity and systems**.
+Features include theme-aware syntax highlighting and an optional **EPIC Blackberries** color theme.
 
-------------------------------------------------------------------------
+The packaged extension is located under:
 
-## 👨‍💻 Why Developers Care
+`VSCode/epic-media-writer-highlighter-..*.vsix`
 
--   Deterministic grammar
--   Plain text
--   Predictable parsing
--   Extensible instruction system
+To install, open VS Code, choose **Extensions → … → Install from VSIX…**, and select the package.
 
-### Example
+Extension source, examples, compatibility tests, and build instructions are included in the repository.
 
-``` epic
-[Chorus {{energetic, swell}}]
-Right here — right now
-```
+Editor tooling supports the language; the specification and parser define its structure and validation rules.
 
-------------------------------------------------------------------------
+## 📖 Specification
 
-## 🎨 Why Creators Care
+**Current specification: EPIC 1.6**
 
--   One file for everything
--   Expressive control
--   AI-ready
--   Timing + direction unified
+The specification defines:
 
-### Example
+- Document headers and authorship
+- Generation metadata
+- Section and lyric structure
+- Performance instructions
+- Timed entry formatting
+- Micro-events and word timing
+- Freeflows and references
+- Formal EBNF grammar
+- Validation rules
 
-``` epic
-[Verse {{calm, drift}}]
-Standing in the pulse of a neon light
+The specification is the authoritative reference for language behavior.
 
-{{lights dim}}
-```
+## 🌱 The Vision
 
-------------------------------------------------------------------------
+Creative intent shouldn't disappear every time a project moves between tools.
 
-## 🔄 Where They Meet
+Lyrics, phrasing, performance instructions, and timing are all parts of the same creative work.
 
-  Creators write   Developers interpret
-  ---------------- ----------------------
-  {{energetic}}    animation intensity
-  {{lights dim}}   lighting trigger
-  @00:51.000       timeline event
+EPIC gives them a shared representation that creators can write, developers can interpret, and applications can exchange.
 
-------------------------------------------------------------------------
+It is not a rendering engine, a music generator, or a replacement for creative software.
 
-# 🧩 Core Concepts
-
--   Instruction blocks → {{ }}
--   Emotives → expressive vocabulary
--   Micro-events → precise timing
--   .epic vs .epicx separation
-
-------------------------------------------------------------------------
-
-## ⭐ Support & Adoption
-
-If EPIC is useful to you:
-
--   ⭐ Star the repo
--   🧪 Build with it
--   🧩 Integrate it
--   📢 Share it
-
-------------------------------------------------------------------------
+**It is the language connecting them.**
 
 ## Visual Studio Code extension
 
@@ -459,6 +433,12 @@ The [extension source, examples, and compatibility tests](VSCode/) are included.
 
 ------------------------------------------------------------------------
 
+## ⭐ Support EPIC
+
+If EPIC is useful to you, star the repository, experiment with the format, build integrations, or contribute to its development.
+
 ## 📜 License
 
-Apache 2.0
+Copyright © 2026 Jade Rigby
+
+Licensed under the **Apache License, Version 2.0**.
