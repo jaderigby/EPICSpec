@@ -1,8 +1,8 @@
 {
   "name": "epic-media-writer-highlighter",
-  "displayName": "EPIC Media Writer\u2122 Highlighter",
+  "displayName": "EPIC Media Writer™ Highlighter",
   "description": "EPIC and EPICX syntax highlighting with the EPIC Media Writer Blackberries color theme.",
-  "version": "0.6.6",
+  "version": "0.6.9",
   "publisher": "epic-media-writer",
   "author": "Jade C. Rigby",
   "engines": {
@@ -55,8 +55,8 @@
       "[epic]": {
         "editor.bracketPairColorization.enabled": false,
         "editor.unicodeHighlight.allowedCharacters": {
-          "\u2019": true,
-          "\u2018": true
+          "’": true,
+          "‘": true
         },
         "editor.tabCompletion": "onlySnippets"
       }
@@ -83,8 +83,18 @@
       },
       {
         "command": "epic.changeHeaderRole",
-        "title": "EPIC: Change Header Role\u2026",
+        "title": "EPIC: Change Header Role…",
         "enablement": "editorLangId == epic && epic.headerRoleSelected && !editorReadonly"
+      },
+      {
+        "command": "epic.splitEntry",
+        "title": "EPIC: Split Selection into New Entry",
+        "enablement": "editorLangId == epic && !editorReadonly && editorHasSelection"
+      },
+      {
+        "command": "epic.addStartEntry",
+        "title": "EPIC: Add Start Entry",
+        "enablement": "editorLangId == epic && !editorReadonly"
       }
     ],
     "keybindings": [
@@ -97,6 +107,18 @@
         "key": "enter",
         "command": "jumpToNextSnippetPlaceholder",
         "when": "editorTextFocus && editorLangId == epic && !editorReadonly && inSnippetMode && hasNextTabstop && epic.freeflowLabel && !suggestWidgetVisible && !isComposing"
+      },
+      {
+        "command": "epic.splitEntry",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a",
+        "when": "editorTextFocus && editorLangId == epic && !editorReadonly && !suggestWidgetVisible && !inSnippetMode && editorHasSelection"
+      },
+      {
+        "command": "epic.addStartEntry",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorTextFocus && editorLangId == epic && !editorReadonly"
       }
     ],
     "menus": {

@@ -1,42 +1,52 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const vm = require('node:vm'), fs = require('node:fs'), path = require('node:path');
-test('hover shows only alternative roles, links change only the key, stale and forged links do nothing', async () => {
-  const commands = new Map(); let hoverProvider, edits = []; const executed = [];
-  const document = {languageId:'epic', version:1, uri:{toString:()=> 'file:///test.epic'}, getText:()=> '---\nAuthor: Jade\n---'};
-  const selection = {start:{line:1,character:0},end:{line:1,character:0}};
-  const editor = {document, selection, selections:[selection], edit:async callback=>{callback({replace:(range,text)=>edits.push({range,text})});return true;}};
+test('authorship uses cursor focus with no hover provider, duplicate roles, or repeated picker', async () => {
+  const commands = new Map(); let selectionChanged, picks = 0, finishPick;
+  const document = { languageId: 'epic', version: 1, getText: () => '---\nAuthor: Jade\nArtist: Someone\n---' };
+  const selection = { start: { line: 1, character: 2 }, end: { line: 1, character: 2 } };
+  const editor = { document, selection, selections: [selection] };
   const vscode = {
-    Range: class {constructor(...args){this.args=args;}},
-    MarkdownString: class {constructor(value){this.value=value;}},
-    Hover: class {constructor(contents,range){this.contents=contents;this.range=range;}},
-    CodeActionKind:{QuickFix:'quickfix'},
-    commands:{executeCommand:async name=>{executed.push(name);},registerCommand:(name,cb)=>{commands.set(name,cb);return {}; }},
-    languages:{registerHoverProvider:(_,p)=>{hoverProvider=p;return {};},registerCodeActionsProvider:()=>({})},
-    workspace:{onDidChangeTextDocument:()=>({})},
-    window:{activeTextEditor:editor,visibleTextEditors:[editor],onDidChangeTextEditorSelection:()=>({}),onDidChangeActiveTextEditor:()=>({}),setStatusBarMessage:()=>{}}
+    TextEditorSelectionChangeKind: { Mouse: 2 },
+    CodeActionKind: { QuickFix: 'quickfix' },
+    commands: { executeCommand: async name => commands.get(name)?.(), registerCommand: (name, fn) => { commands.set(name, fn); return {}; } },
+    languages: { registerHoverProvider: () => assert.fail('Authorship must not register a hover'), registerCodeActionsProvider: () => ({}) },
+    workspace: { onDidChangeTextDocument: () => ({}) },
+    window: { activeTextEditor: editor,
+      onDidChangeTextEditorSelection: fn => { selectionChanged = fn; return {}; }, onDidChangeActiveTextEditor: () => ({}),
+      showQuickPick: choices => { picks++; assert.deepEqual(Array.from(choices), ['Creator']); return new Promise(resolve => { finishPick = resolve; }); }
+    }
   };
-  const sandbox={module:{exports:{}}, require:name=>name==='vscode'?vscode:require('../src/header-roles.cjs')};
-  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../src/header-role-ui.cjs'),'utf8'),sandbox);
-  sandbox.module.exports.registerHeaderRoles({subscriptions:[]});
-  const hover=hoverProvider.provideHover(document,{line:1,character:2});
-  assert.match(hover.contents.value,/Change to: \[Artist\]/);
-  assert.match(hover.contents.value,/\[Creator\]/);
-  assert.doesNotMatch(hover.contents.value,/\[Author\]/);
-  assert.deepEqual(Array.from(hover.contents.isTrusted.enabledCommands),['epic.applyHeaderRole']);
-  assert.equal(hoverProvider.provideHover(document,{line:1,character:9}),undefined);
-  assert.equal(hoverProvider.provideHover(document,{line:2,character:0}),undefined);
-  const encoded=hover.contents.value.match(/command:epic.applyHeaderRole\?([^)]*)/)[1];
-  const [id, role]=JSON.parse(decodeURIComponent(encoded));
-  assert.equal(typeof id, 'string');
-  assert.doesNotMatch(decodeURIComponent(encoded), /file:|uri|version/);
-  await commands.get('epic.applyHeaderRole')(id, role);
-  assert.equal(edits[0].text,'Artist');
-  assert.equal(executed.at(-1), 'editor.action.hideHover');
-  assert.deepEqual(Array.from(edits[0].range.args),[1,0,1,6]);
-  await commands.get('epic.applyHeaderRole')(id, 'Title');
-  await commands.get('epic.applyHeaderRole')('missing', role);
-  document.version++;
-  await commands.get('epic.applyHeaderRole')(id, role);
-  assert.equal(edits.length,1);
+  const sandbox = { module: { exports: {} }, require: name => name === 'vscode' ? vscode : require('../src/header-roles.cjs') };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../src/header-role-ui.cjs'), 'utf8'), sandbox);
+  sandbox.module.exports.registerHeaderRoles({ subscriptions: [] });
+  assert.equal(commands.has('epic.applyHeaderRole'), false);
+  const event = { kind: 2, textEditor: editor };
+  const open = selectionChanged(event);
+  assert.equal(picks, 1);
+  await selectionChanged(event);
+  assert.equal(picks, 1);
+  finishPick(undefined);
+  await open;
+  selection.start.character = selection.end.character = 6; // colon
+  await selectionChanged(event);
+  assert.equal(picks, 1);
+  selection.start.character = selection.end.character = 2;
+  editor.selections = [selection, selection];
+  await selectionChanged(event);
+  assert.equal(picks, 1);
+  editor.selections = [selection];
+  const keyboardOpen = selectionChanged({ kind: 1, textEditor: editor });
+  assert.equal(picks, 2, 'Moving back into the key by keyboard opens the picker');
+  finishPick(undefined);
+  await keyboardOpen;
+  selection.start.character = selection.end.character = 3;
+  await selectionChanged({ kind: 1, textEditor: editor });
+  assert.equal(picks, 2, 'Moving within the key does not reopen the picker');
+  selection.start.character = selection.end.character = 9;
+  await selectionChanged(event);
+  selection.start.character = selection.end.character = 2;
+  document.getText = () => '---\nAuthor: Jade\nArtist: Someone\nCreator: Another\n---';
+  await selectionChanged(event);
+  assert.equal(picks, 2);
 });

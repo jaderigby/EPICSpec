@@ -21,7 +21,7 @@ for (const format of ['epic', 'epicx']) {
     assert.deepEqual(again.document.header.generation.fields, result.document.header.generation.fields);
   });
 }
-for (const separator of ['\n', '\n\n\n']) {
+for (const separator of ['\n\n\n']) {
   test(`invalid spacing ${JSON.stringify(separator)} preserves both options`, () => {
     const result = parse(`Styles:\n1. Ambient${separator}2. Techno\n\nUseStyle: 2`);
     hasIssue(result, 'INVALID_STYLE_OPTION_SEPARATOR');
@@ -46,8 +46,27 @@ test('single freeform styles preserve paragraphs', () => {
 test('UseStyle requires numbered styles', () => {
   hasIssue(parse('Styles: Ambient\n\nUseStyle: 1'), 'USESTYLE_WITHOUT_MULTIPLE_STYLES');
 });
-test('numbered options cannot silently consume continuation text', () => {
-  hasIssue(parse('Styles:\n1. Ambient\nextra text\n\n2. Techno'), 'INVALID_GENERATION_FIELD');
+for (const format of ['epic', 'epicx']) {
+  test(`${format}: multiline numbered styles preserve prompts and roundtrip`, () => {
+    const result = parse('Styles:\n1. Ambient\n  Warm pads and evolving textures\n2. A numbered instruction, still style one\nMood: calm\n\n2. Techno\nDriving percussion\n\nUseStyle: 2', format);
+    assert.equal(result.ok, true, JSON.stringify(result.issues));
+    const styles = result.document.header.generation.fields.Styles;
+    assert.deepEqual(styles.options.map(o => o.lines), [
+      ['Ambient', '  Warm pads and evolving textures', '2. A numbered instruction, still style one', 'Mood: calm'],
+      ['Techno', 'Driving percussion']
+    ]);
+    assert.deepEqual(styles.options.map(o => o.value), styles.options.map(o => o.lines.join('\n')));
+    const again = parseDocument(stringifyDocument(result.document), { format });
+    assert.equal(again.ok, true, JSON.stringify(again.issues));
+    assert.deepEqual(again.document.header.generation.fields, result.document.header.generation.fields);
+  });
+}
+test('an adjacent numbered line is continuation text, not a new option', () => {
+  const result = parse('Styles:\n1. Ambient\n2. Techno\n\nUseStyle: 1');
+  assert.equal(result.ok, true, JSON.stringify(result.issues));
+  assert.equal(result.document.header.generation.fields.Styles.options.length, 1);
+  assert.equal(result.document.header.generation.fields.Styles.options[0].value, 'Ambient\n2. Techno');
+  hasIssue(parse('Styles:\n1. Ambient\n2. Techno\n\nUseStyle: 2'), 'INVALID_USESTYLE_INDEX');
 });
 test('malformed option marker is rejected', () => {
   hasIssue(parse('Styles:\n1. Ambient\n\n2.\n\nUseStyle: 2'), 'INVALID_STYLE_OPTION_MARKER');
@@ -70,7 +89,11 @@ for (const format of ['epic', 'epicx']) {
           assert.ok(validateDocument(result.document).some(i => i.code === 'INVALID_STYLES_TERMINATOR'));
         }
         const text = stringifyDocument(result.document);
-        assert.match(text, /2\. Techno\n\n(?:UseStyle:|Persona:|---)/);
+        if (count === 0 && following) {
+          assert.match(text, /2\. Techno\n(?:UseStyle: 2|Persona: Test)\n\n---/);
+        } else {
+          assert.match(text, /2\. Techno\n\n(?:UseStyle:|Persona:|---)/);
+        }
         assert.equal(parseDocument(text, { format }).ok, true);
       });
     }
@@ -79,4 +102,12 @@ for (const format of ['epic', 'epicx']) {
 test('one numbered option also requires a trailing blank line', () => {
   hasIssue(parse('Styles:\n1. Ambient'), 'INVALID_STYLES_TERMINATOR');
   assert.equal(parse('Styles:\n1. Ambient\n').ok, true);
+});
+
+test('multiline styles support CRLF and retain source line locations', () => {
+  const text = '---\nTitle: Test\nAuthor: Test\n\n[Generation]\nStyles:\n1. Ambient\nSoft textures\n\n5. Techno\nHard drums\n\nUseStyle: 5\n---\n';
+  const result = parseDocument(text.replaceAll('\n', '\r\n'));
+  assert.equal(result.ok, true, JSON.stringify(result.issues));
+  assert.deepEqual(result.document.header.generation.fields.Styles.options.map(o => o.loc.startLine), [7, 10]);
+  assert.equal(parseDocument(stringifyDocument(result.document)).ok, true);
 });

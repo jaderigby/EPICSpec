@@ -5,6 +5,7 @@ const { registerFreeflowBackgrounds } = require('./freeflow-backgrounds.cjs');
 const { offerDefaultLanguage } = require('./first-run.cjs');
 const { registerHeaderRoles } = require('./header-role-ui.cjs');
 const { registerSnippets } = require('./snippets.cjs');
+const { registerEntryCommands } = require('./entry-commands.cjs');
 const { planNormalization } = require('./entry-normalization.cjs');
 function isEpicx(document) {
   return document.languageId === 'epic' && /\.epicx(?:\.txt)?$/i.test(document.uri.path);
@@ -17,6 +18,7 @@ function activate(context) {
   registerHeaderRoles(context);
   const snapshots = new Map();
   const applying = new Set();
+  registerEntryCommands(context, applying);
   const remember = document => {
     if (isEpicx(document)) snapshots.set(document.uri.toString(), document.getText());
   };

@@ -40,7 +40,7 @@ test('popup changes only key; quick fixes match, cancellation and stale editors 
   await commands.get('epic.changeHeaderRole')();
   assert.equal(edits.length, 1); assert.equal(edits[0].text, 'Author');
   assert.deepEqual(Array.from(edits[0].range.args), [1,2,1,8]);
-  // Clicking or selecting the label no longer invokes a popup.
+  // A selection ending outside the key does not open the picker.
   await selectionChanged({ kind: 2, textEditor: editor });
   assert.equal(edits.length, 1);
   await selectionChanged({ kind: 1, textEditor: editor });
@@ -50,6 +50,15 @@ test('popup changes only key; quick fixes match, cancellation and stale editors 
   editor.selection = { start: {line:1,character:11}, end: {line:1,character:11} };
   await selectionChanged({kind:2,textEditor:editor});
   assert.equal(edits.length, 1);
+  editor.selection = { start: {line:1,character:3}, end: {line:1,character:3} };
+  editor.selections = [editor.selection];
+  await selectionChanged({kind:1,textEditor:editor});
+  assert.equal(edits.length, 2, 'Keyboard focus inside the key opens the picker');
+  await selectionChanged({kind:3,textEditor:editor});
+  await selectionChanged({kind:2,textEditor:editor});
+  assert.equal(edits.length, 2, 'Movement within the same key does not reopen it');
+  edits = [];
+  await commands.get('epic.changeHeaderRole')();
   editor.selection = selectedKey;
   const actions = provider.provideCodeActions(document, selection);
   assert.equal(actions.length, 2); assert.equal(actions[1].edit.replacement.text, 'Creator');

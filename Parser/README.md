@@ -18,9 +18,10 @@ Run this to test: node ./Parser/test-runner.mjs examples/Elem-en_Ellow_Vo.epic
 
 Run regression tests with `npm test`. Run the example CLI with `npm run test:example`.
 
-Each numbered `Styles` option occupies one line, with exactly one empty line
+Each numbered `Styles` option can span multiple nonempty lines, with exactly one empty line
 between options and after the last option (before the next field or closing
 header delimiter).
+A numbered-looking continuation line remains part of the current prompt until a blank line separates the next option.
 `UseStyle` must be an integer matching an option index. Single freeform styles
 continue to support multiline text and empty lines.
 
@@ -28,8 +29,10 @@ continue to support multiline text and empty lines.
 [Generation]
 Styles:
 1. Ambient
+Warm pads and evolving textures
 
 2. Techno
+Driving percussion
 
 UseStyle: 2
 ```

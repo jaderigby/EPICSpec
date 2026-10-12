@@ -343,7 +343,7 @@ Energy: 0.75
 
 Supported generation properties include `Styles`, `UseStyle`, `Persona`, `Cover`, `VocalGender`, `Weirdness`, `StyleInfluence`, `Energy`, and `TempoHint`.
 
-Multiple numbered styles can be defined and selected using `UseStyle`.
+Multiple numbered styles can be defined and selected using `UseStyle`. Each option may contain multiple nonempty lines; exactly one blank line separates options and follows the final option. A numbered-looking line without a preceding blank line remains part of the current style.
 
 The `[Generation]` subsection is optional and, when present, appears last within the document header.
 
@@ -520,7 +520,7 @@ The [extension source, examples, and compatibility tests](VSCode/) are included.
 
 ## 📖 Specification
 
-**EPIC Specification 1.6**
+**[EPIC Specification 1.7](EPIC%20Spec-1.7.pdf)**
 
 The specification defines both `.epic` and `.epicx`, including their document structures, metadata, instructions, timing, micro-events, authoring features, formal grammar, and validation rules.
 

@@ -5,7 +5,7 @@ A VS Code extension with EPIC / EPICX syntax highlighting and an optional **Blac
 ## Install
 
 1. In VS Code, open Extensions and choose **… → Install from VSIX…**.
-2. Select `epic-media-writer-highlighter-0.6.6.vsix`.
+2. Select `epic-media-writer-highlighter-0.6.8.vsix`.
 3. Run **Preferences: Color Theme** and choose **Blackberries**.
 4. Open a `.epic` or `.epicx` file. For another extension, select **EPIC Media** from the language selector.
 
@@ -96,9 +96,9 @@ Templates remain in `snippets/epic.json`. Keep the authorship value as a numbere
 
 ## Change header authorship role
 
-Hover over **Author**, **Artist**, or **Creator** inside the fenced header. A card beside the field shows **Change to: Artist · Creator** (or the other available roles). Click a role to replace the key while preserving its value and spacing. Normal clicks and keyboard navigation no longer open a picker at the top of the window.
+Place the cursor inside **Author**, **Artist**, or **Creator** in the fenced header, by clicking or using the keyboard, to open the role picker. It opens once when you enter a field; move outside the key and back in to reopen it. Choose an available role to replace the key while preserving its value and spacing. Hovering and placing the cursor in the value do not open the picker.
 
-The header must have opening and closing `---` lines. Roles already present elsewhere in the header are omitted to avoid duplicates. Body text and Generation settings are excluded. If the document changes after the card is shown, hover again to refresh its links. Changes are undoable.
+The header must have opening and closing `---` lines. Roles already present elsewhere in the header are omitted to avoid duplicates. Body text and Generation settings are excluded. If the document changes while the picker is open, click the field again to retry. Changes are undoable.
 
 The right-click **EPIC: Change Header Role…** command and **Cmd+. / Ctrl+.** Quick Fix remain available as alternatives. Authorship memory learns from any of the three roles.
 
@@ -109,3 +109,16 @@ On first activation after installation, a one-time prompt offers **Use EPIC** or
 Declining or dismissing the prompt keeps the current setting. The prompt does not repeat on restart or future extension updates. Existing installations receive it once when first updating to this feature. To change the choice later, edit **Files: Default Language** in VS Code Settings (`epic` for EPIC, `plaintext` for plain text).
 
 The `ff` snippet starts with the cursor inside `[{&}]` for an optional label. Press Tab or Enter from that label to move to the next line and write the freeflow content.
+
+## Entry shortcuts
+
+In EPIC language mode, use these commands in a numbered, timed entry with a section label:
+
+| macOS | Windows / Linux | Action |
+| --- | --- | --- |
+| Cmd+Shift+A | Ctrl+Shift+A | Move selected payload text into a new entry below. Select text within one payload line. |
+| Cmd+Shift+D | Ctrl+Shift+D | Insert a new entry containing `{{start}}` below the entry at the cursor or selection. Existing lyrics stay intact. |
+
+Both copy the section label (including its instructions), set the new timestamp exactly 2 seconds after the source entry’s start, and increment following entry numbers without changing their timestamps. Each command is a single undoable edit and places the cursor after the new payload. Multi-cursor selections and untimed text are left unchanged. These explicit commands work independently of automatic pasted-entry repair, including when the new timestamp matches an existing entry. They also appear in the Command Palette.
+
+Cmd+Shift+D takes priority over Run and Debug while a writable EPIC editor has text focus, including during autocomplete or snippet editing. Other language modes retain their usual shortcuts; no personal keyboard override is needed.
