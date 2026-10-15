@@ -19,6 +19,7 @@ function activate(context) {
   const snapshots = new Map();
   const applying = new Set();
   registerEntryCommands(context, applying);
+  require('./studio-link.cjs').registerStudioLink(context, applying);
   const remember = document => {
     if (isEpicx(document)) snapshots.set(document.uri.toString(), document.getText());
   };
