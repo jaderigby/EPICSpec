@@ -761,6 +761,25 @@
         "foreground": "#7B6C64",
         "fontStyle": ""
       }
+    },
+    {
+      "name": "EPIC micro-event marker",
+      "scope": [
+        "punctuation.definition.micro-event.epic"
+      ],
+      "settings": {
+        "foreground": "#1fcdff",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "EPIC micro-event text",
+      "scope": [
+        "string.unquoted.micro-event.epic"
+      ],
+      "settings": {
+        "foreground": "#efc8c8"
+      }
     }
   ]
 }

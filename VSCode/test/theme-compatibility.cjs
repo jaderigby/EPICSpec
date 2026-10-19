@@ -53,6 +53,18 @@ async function main() {
       assert.equal(section.colorAt(0), '#F4B36D');
       assert.equal(time.colorAt(0), '#8FE6C8');
     }
+    for (const source of ['@00:01.000 soft {{fade}}', '@ implicit']) {
+      const micro = line(source, 'punctuation.definition.micro-event.epic');
+      if (name === 'Blackberries') {
+        assert.equal(micro.colorAt(0), '#1FCDFF');
+        assert.equal(micro.colorAt(source.indexOf(' ') + 1), '#EFC8C8');
+        if (source.includes('00:')) {
+          assert.equal(micro.colorAt(1), '#8FE6C8');
+          assert.equal(micro.colorAt(source.indexOf('{{')), '#C177DE');
+        }
+      }
+    }
+    assert.deepEqual(line('Ordinary lyrics').scoped.tokens[0].scopes, ['text.epic']);
     line('{{soft', 'keyword.control.instruction.epic');
     line('continued}}', 'keyword.control.instruction.epic');
     assert.deepEqual(line('Ordinary lyrics').scoped.tokens[0].scopes, ['text.epic']);

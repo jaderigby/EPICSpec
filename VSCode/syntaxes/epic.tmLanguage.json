@@ -13,6 +13,9 @@
       "include": "#section"
     },
     {
+      "include": "#micro-event"
+    },
+    {
       "name": "constant.numeric.entry.epic",
       "match": "^\\s*\\d+\\s*$"
     },
@@ -183,6 +186,22 @@
               "include": "#inline"
             }
           ]
+        }
+      ]
+    },
+    "micro-event": {
+      "name": "meta.micro-event.epic",
+      "contentName": "string.unquoted.micro-event.epic",
+      "begin": "^\\s*(@)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.micro-event.epic"
+        }
+      },
+      "end": "$",
+      "patterns": [
+        {
+          "include": "#inline"
         }
       ]
     }
